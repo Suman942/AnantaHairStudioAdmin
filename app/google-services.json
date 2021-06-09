@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "642375539807",
+    "project_id": "anantahairstudio",
+    "storage_bucket": "anantahairstudio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642375539807:android:293a41845cd1933a508fea",
+        "android_client_info": {
+          "package_name": "com.freelance.anantahairstudio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642375539807-57pvf23u9nqo1pgtl7ejtk509l2qbv44.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freelance.anantahairstudio",
+            "certificate_hash": "5f0a90a5817fb14b6545e1b1c5cab9653e6377e0"
+          }
+        },
+        {
+          "client_id": "642375539807-su04mh478147p3tvm5oua1jt5gas6oc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5pjYVSRmVMdonDHMqKMsfV9PqUIM6iUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642375539807-su04mh478147p3tvm5oua1jt5gas6oc4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642375539807:android:80ac521054801127508fea",
+        "android_client_info": {
+          "package_name": "com.freelance.anantahairstudioadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642375539807-su04mh478147p3tvm5oua1jt5gas6oc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5pjYVSRmVMdonDHMqKMsfV9PqUIM6iUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642375539807-su04mh478147p3tvm5oua1jt5gas6oc4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
