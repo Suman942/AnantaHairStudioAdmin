@@ -3,9 +3,13 @@ package com.freelance.anantahairstudioadmin.home;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.freelance.anantahairstudioadmin.R;
+import com.freelance.anantahairstudioadmin.allBooking.AllBookingsActivity;
+import com.freelance.anantahairstudioadmin.allBooking.adapter.AcceptedBookingActivity;
 import com.freelance.anantahairstudioadmin.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
@@ -18,5 +22,19 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void clickView() {
+        binding.allBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, AllBookingsActivity.class));
+                finish();
+            }
+        });
+        binding.acceptedBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, AcceptedBookingActivity.class));
+                finish();
+            }
+        });
     }
 }
