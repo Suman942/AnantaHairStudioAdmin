@@ -28,21 +28,21 @@ public class NotificationRepository {
         return notificationRepository;
     }
 
-//    public void sendNotification(JsonObject jsonObject, MutableLiveData<FcmResponse> mutableLiveData){
-//        apiInterface.sendNotifications(jsonObject).enqueue(new Callback<FcmResponse>() {
-//            @Override
-//            public void onResponse(Call<FcmResponse> call, Response<FcmResponse> response) {
-//                if (response.isSuccessful()){
-//                    Log.i("notification","success");
-//                    mutableLiveData.setValue(response.body());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<FcmResponse> call, Throwable t) {
-//                Log.i("notification",""+t.getMessage());
-//                mutableLiveData.setValue(null);
-//            }
-//        });
-//    }
+    public void sendNotification(JsonObject jsonObject, MutableLiveData<FcmResponse> mutableLiveData){
+        apiInterface.sendNotifications(jsonObject).enqueue(new Callback<FcmResponse>() {
+            @Override
+            public void onResponse(Call<FcmResponse> call, Response<FcmResponse> response) {
+                if (response.isSuccessful()){
+                    Log.i("notification","success");
+                    mutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FcmResponse> call, Throwable t) {
+                Log.i("notification",""+t.getMessage());
+                mutableLiveData.setValue(null);
+            }
+        });
+    }
 }

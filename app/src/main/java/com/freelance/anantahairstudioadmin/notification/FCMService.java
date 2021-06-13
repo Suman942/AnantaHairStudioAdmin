@@ -1,5 +1,6 @@
 package com.freelance.anantahairstudioadmin.notification;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -11,6 +12,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.freelance.anantahairstudioadmin.activities.MainActivity;
 import com.freelance.anantahairstudioadmin.R;
+import com.freelance.anantahairstudioadmin.allBooking.AllBookingsActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -32,7 +34,7 @@ public class FCMService extends FirebaseMessagingService {
     }
 
     public  void showNotifications(String title, String message){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, AllBookingsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -40,13 +42,15 @@ public class FCMService extends FirebaseMessagingService {
                 .setSmallIcon(R.drawable.main_logo)
                 .setContentTitle(title)
                 .setContentText(message)
+                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+                .setVibrate(new long[]{0L})
                 .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
+                .setAutoCancel(false);
 
         NotificationManager notificationManager =
                 (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0 /* ID of notification */, builder.build());
+        notificationManager.notify(999 /* ID of notification */, builder.build());
 
     }
 }

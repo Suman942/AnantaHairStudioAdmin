@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="5dp"
+        >
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/serviceImg"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/serviceNameTxt"
+            android:background="@drawable/ic_image_placeholder"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/serviceImg"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="Service name"
+            android:textColor="#52508B"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"
+            android:id="@+id/serviceNameTxt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/discountAmount"
+            app:layout_constraintLeft_toLeftOf="@id/serviceNameTxt"
+            android:text="Individual - 4"
+            android:id="@+id/noOfIndividualText"
+            android:textColorHint="#777"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="#777"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/discountAmount"
+
+            app:layout_constraintTop_toTopOf="@id/amountTxt"
+            app:layout_constraintBottom_toBottomOf="@id/amountTxt"
+            app:layout_constraintLeft_toLeftOf="@id/serviceNameTxt"
+            android:text="\u20B9 100 OFF"
+            android:textSize="14sp"
+            android:textColor="#00E994" />
+
+        <TextView
+            android:id="@+id/amountTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\u20B9 400"
+            android:textColor="#777777"
+            android:textSize="16sp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintRight_toRightOf="@id/serviceNameTxt"
+            app:layout_constraintTop_toBottomOf="@id/serviceNameTxt"
+            />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"
+            android:id="@+id/g2"/>
+
+
+
+
+
+        <!--        <View-->
+        <!--            android:layout_width="30dp"-->
+        <!--            android:layout_height="30dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/addView"-->
+        <!--            android:background="#F4F4F4"-->
+        <!--            app:layout_constraintLeft_toRightOf="@id/g1"-->
+        <!--            android:id="@+id/minusView"/>-->
+
+        <!--        <ImageView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/minusView"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/minusView"-->
+        <!--            app:layout_constraintLeft_toLeftOf="@id/minusView"-->
+        <!--            app:layout_constraintRight_toRightOf="@id/minusView"-->
+        <!--            android:background="@drawable/ic_minus"-->
+        <!--            android:id="@+id/minus"/>-->
+
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintRight_toLeftOf="@id/addView"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/addView"-->
+        <!--            app:layout_constraintLeft_toRightOf="@id/minusView"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/addView"-->
+        <!--            android:id="@+id/counterTxt"-->
+        <!--            android:textSize="18sp"-->
+        <!--            android:text="1"-->
+        <!--            android:textColor="#777777"/>-->
+
+        <!--        <View-->
+        <!--            android:layout_width="30dp"-->
+        <!--            android:layout_height="30dp"-->
+        <!--            app:layout_constraintRight_toRightOf="@id/amountTxt"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/amountTxt"-->
+        <!--            android:background="#F4F4F4"-->
+        <!--            android:layout_marginTop="14dp"-->
+        <!--            android:id="@+id/addView"/>-->
+
+        <!--        <ImageView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/addView"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@id/addView"-->
+        <!--            app:layout_constraintLeft_toLeftOf="@id/addView"-->
+        <!--            app:layout_constraintRight_toRightOf="@id/addView"-->
+        <!--            android:background="@drawable/ic_add"-->
+        <!--            android:id="@+id/add"/>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

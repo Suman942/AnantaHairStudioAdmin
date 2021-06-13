@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.freelance.anantahairstudioadmin.R;
+import com.freelance.anantahairstudioadmin.addService.AddServiceActivity;
 import com.freelance.anantahairstudioadmin.allBooking.AllBookingsActivity;
-import com.freelance.anantahairstudioadmin.allBooking.adapter.AcceptedBookingActivity;
+import com.freelance.anantahairstudioadmin.acceptedBooking.AcceptedBookingActivity;
 import com.freelance.anantahairstudioadmin.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
@@ -33,6 +34,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, AcceptedBookingActivity.class));
+                finish();
+            }
+        });
+
+        binding.editService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, AddServiceActivity.class));
                 finish();
             }
         });
