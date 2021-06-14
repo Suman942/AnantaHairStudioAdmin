@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         notifications();
         splashScreenThread();
+
     }
     private void notifications() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
