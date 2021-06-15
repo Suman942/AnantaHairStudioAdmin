@@ -116,4 +116,11 @@ public class BookingDetailsActivity extends AppCompatActivity {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(BookingDetailsActivity.this, AllBookingsActivity.class));
+        finish();
+    }
 }

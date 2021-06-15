@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.freelance.anantahairstudioadmin.R;
+import com.freelance.anantahairstudioadmin.allBooking.AllBookingsActivity;
+import com.freelance.anantahairstudioadmin.allBooking.BookingDetailsActivity;
 import com.freelance.anantahairstudioadmin.allBooking.adapter.BookingDetailsAdapter;
 import com.freelance.anantahairstudioadmin.allBooking.response.AcceptBookingResponse;
 import com.freelance.anantahairstudioadmin.allBooking.response.BookingDetailsResponse;
@@ -103,5 +105,12 @@ public class AcceptedBookingDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(AcceptedBookingDetailsActivity.this, AcceptedBookingActivity.class));
+        finish();
     }
 }

@@ -64,7 +64,7 @@ public class FCMService extends FirebaseMessagingService {
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
                 .setVibrate(new long[]{0L})
                 .setContentIntent(pendingIntent)
-                .setAutoCancel(false);
+                .setAutoCancel(true);
 
         NotificationManager notificationManager =
                 (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
