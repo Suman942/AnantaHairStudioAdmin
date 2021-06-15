@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnantaHairStudioAdmin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".invoice.InvoiceActivity"></activity>
+        <activity android:name=".adminInfo.AdminInfoActivity"></activity>
+        <activity android:name=".addService.AllServicesActivity" />
+        <activity android:name=".invoice.InvoiceActivity" />
         <activity android:name=".acceptedBooking.AcceptedBookingDetailsActivity" />
         <activity android:name=".allBooking.BookingDetailsActivity" />
         <activity android:name=".addService.AddServiceActivity" />

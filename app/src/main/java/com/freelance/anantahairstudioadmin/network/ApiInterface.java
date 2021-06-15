@@ -2,10 +2,13 @@ package com.freelance.anantahairstudioadmin.network;
 
 
 
+import com.freelance.anantahairstudioadmin.addService.pojo.ServicesResponse;
+import com.freelance.anantahairstudioadmin.addService.pojo.UpdateServiceResponse;
 import com.freelance.anantahairstudioadmin.allBooking.response.AcceptBookingResponse;
 import com.freelance.anantahairstudioadmin.allBooking.response.AllBookingResponse;
 import com.freelance.anantahairstudioadmin.allBooking.response.BookingDetailsResponse;
 import com.freelance.anantahairstudioadmin.notification.FcmResponse;
+import com.freelance.anantahairstudioadmin.signup.Authentication;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -75,5 +78,55 @@ public interface ApiInterface {
     @POST("https://fcm.googleapis.com/fcm/send")
     Call<FcmResponse> sendNotifications(
             @Body JsonObject jsonObject
+    );
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @GET("services")
+    Call<ServicesResponse> services(
+            @Header("Authorization") String token
+    );
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @FormUrlEncoded
+    @POST("login")
+    Call<Authentication> authentication(
+            @Field("email") String email
+    );
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @FormUrlEncoded
+    @POST("admin/update")
+    Call<UpdateServiceResponse> updateService(
+            @Field("service_id") String service_id,
+            @Field("category_id") String category_id,
+            @Field("price") String price,
+            @Field("discounted_price") String discounted_price,
+            @Field("name") String name,
+            @Field("info") String info
+            );
+
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @FormUrlEncoded
+    @POST("admin/update")
+    Call<UpdateServiceResponse> updateAdminDetail(
+            @Field("service_id") String service_id,
+            @Field("category_id") String category_id,
+            @Field("business_data") String business_data,
+            @Field("phone") String phone,
+            @Field("whatsapp") String whatsapp,
+            @Field("email") String email
     );
 }

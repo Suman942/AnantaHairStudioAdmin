@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.freelance.anantahairstudioadmin.R;
 import com.freelance.anantahairstudioadmin.addService.AddServiceActivity;
+import com.freelance.anantahairstudioadmin.addService.AllServicesActivity;
+import com.freelance.anantahairstudioadmin.adminInfo.AdminInfoActivity;
 import com.freelance.anantahairstudioadmin.allBooking.AllBookingsActivity;
 import com.freelance.anantahairstudioadmin.acceptedBooking.AcceptedBookingActivity;
 import com.freelance.anantahairstudioadmin.databinding.ActivityHomeBinding;
@@ -41,7 +43,15 @@ public class HomeActivity extends AppCompatActivity {
         binding.editService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, AddServiceActivity.class));
+                startActivity(new Intent(HomeActivity.this, AllServicesActivity.class));
+                finish();
+            }
+        });
+
+        binding.adminAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, AdminInfoActivity.class));
                 finish();
             }
         });

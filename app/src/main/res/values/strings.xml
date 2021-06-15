@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">AnantaHairStudioAdmin</string>
+    <string name="app_name">Ananta Admin</string>
+    <string name="authToken">authToken</string>
+
 </resources>

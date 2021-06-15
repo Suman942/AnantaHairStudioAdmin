@@ -4,16 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.freelance.anantahairstudioadmin.R;
 import com.freelance.anantahairstudioadmin.databinding.ActivitySignUpBinding;
 import com.freelance.anantahairstudioadmin.home.HomeActivity;
+import com.freelance.anantahairstudioadmin.utils.PrefManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -32,14 +36,37 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 234;
     GoogleSignInClient googleSignInClient;
+    AuthenticationLoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
+        loginViewModel = new ViewModelProvider(this).get(AuthenticationLoginViewModel.class);
+        PrefManager.getInstance(this, true);
+
         initializationOfGoogleSigninOption();
         clickViews();
+        observer();
+    }
+
+    private void observer() {
+        loginViewModel.authenticationLiveData().observe(this, new Observer<Authentication>() {
+            @Override
+            public void onChanged(Authentication authentication) {
+                if (authentication != null){
+                    PrefManager.getInstance().putString(R.string.authToken,authentication.getData().getToken());
+
+                        Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    Log.i("authentication","token: "+authentication.getData().getToken());
+                }
+            }
+        });
+
     }
 
     private void clickViews() {
@@ -94,8 +121,9 @@ public class SignUpActivity extends AppCompatActivity {
                             Uri uri = mAuth.getCurrentUser().getPhotoUrl();
                             String profileImg = uri.toString();
 
-                            startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
-                            finish();
+                            loginViewModel.authentication(email);
+
+
 
 //                            Toast.makeText(LoginActivity.this, "Successfully logged", Toast.LENGTH_SHORT).show();
                         } else {

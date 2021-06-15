@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:fillViewport="true"
     tools:context=".addService.AddServiceActivity">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,27 +19,196 @@
         android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:text="Edit Service"
+            android:text="Add Service"
             android:textSize="18sp"
             android:layout_marginLeft="20dp"
             android:textColor="@color/white"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.05"
+        android:orientation="vertical"
+        android:id="@+id/g1"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.95"
+        android:orientation="vertical"
+        android:id="@+id/g2"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_marginTop="25dp"
+        app:layout_constraintLeft_toLeftOf="@id/g1"
+        app:layout_constraintRight_toRightOf="@id/g2"
+        app:boxBackgroundColor="@color/white"
+        android:textColorHint="@color/colorPrimary"
+        android:id="@+id/serviceNameLayout"
+        android:hint="Service name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:id="@+id/serviceName"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/serviceNameLayout"
+        android:layout_marginTop="25dp"
+        app:layout_constraintLeft_toLeftOf="@id/g1"
+        app:layout_constraintRight_toRightOf="@id/g2"
+        android:hint="Category"
+        android:textColorHint="@color/colorPrimary"
+        app:boxBackgroundColor="@color/white"
+        android:id="@+id/categoryLayout">
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:editable="false"
+            android:paddingLeft="15dp"
+            android:layout_marginTop="8dp"
+            android:paddingTop="25dp"
+            android:drawableEnd="@drawable/ic_drop_down"
+            android:drawableTint="@color/colorPrimary"
+            android:id="@+id/category"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/categoryLayout"
+        android:layout_marginTop="25dp"
+        app:layout_constraintLeft_toLeftOf="@id/g1"
+        app:layout_constraintRight_toRightOf="@id/g2"
+        android:hint="Price (in \u20B9)"
+        app:boxBackgroundColor="@color/white"
+
+        android:textColorHint="@color/colorPrimary"
+        android:id="@+id/priceLayout">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:inputType="number"
+            android:id="@+id/price"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/priceLayout"
+        android:layout_marginTop="25dp"
+        app:layout_constraintLeft_toLeftOf="@id/g1"
+        app:layout_constraintRight_toRightOf="@id/g2"
+        android:hint="Discount Price (in \u20B9)"
+        app:boxBackgroundColor="@color/white"
+        android:textColorHint="@color/colorPrimary"
+        android:id="@+id/discountPriceLayout">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:inputType="number"
+            android:id="@+id/discountPrice"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/discountPriceLayout"
+        android:layout_marginTop="25dp"
+        app:layout_constraintLeft_toLeftOf="@id/g1"
+        app:layout_constraintRight_toRightOf="@id/g2"
+        android:hint="Description"
+        app:boxBackgroundColor="@color/white"
+        android:textColorHint="@color/colorPrimary"
+        android:id="@+id/descriptionLayout">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:id="@+id/description"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--    <AutoCompleteTextView-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/price"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        app:layout_constraintLeft_toLeftOf="@id/g1"-->
+<!--        app:layout_constraintRight_toRightOf="@id/g2"-->
+<!--        android:hint="Discount price"-->
+<!--        android:textColor="@color/colorPrimary"-->
+<!--        android:textColorHint="@color/colorPrimary"-->
+<!--        android:paddingLeft="15dp"-->
+<!--        android:textSize="16sp"-->
+<!--        android:editable="true"-->
+<!--        android:id="@+id/discountPrice"/>-->
+
+<!--    <AutoCompleteTextView-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/discountPrice"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        app:layout_constraintLeft_toLeftOf="@id/g1"-->
+<!--        app:layout_constraintRight_toRightOf="@id/g2"-->
+<!--        android:hint="Description"-->
+<!--        android:textColor="@color/colorPrimary"-->
+<!--        android:textColorHint="@color/colorPrimary"-->
+<!--        android:textSize="16sp"-->
+<!--        android:editable="true"-->
+<!--        android:paddingLeft="15dp"-->
+<!--        android:id="@+id/description"/>-->
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toLeftOf="@id/g1"
+        app:layout_constraintRight_toRightOf="@id/g2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        android:id="@+id/update">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:background="@drawable/ic_add"
-            android:layout_marginRight="20dp"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_gravity="center"
+            android:text="Update Service"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 </layout>
