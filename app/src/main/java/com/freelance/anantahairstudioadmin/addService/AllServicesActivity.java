@@ -13,7 +13,9 @@ import android.view.View;
 import com.freelance.anantahairstudioadmin.R;
 import com.freelance.anantahairstudioadmin.addService.pojo.ServicesResponse;
 import com.freelance.anantahairstudioadmin.addService.viewModel.ServicesViewModel;
+import com.freelance.anantahairstudioadmin.adminInfo.AdminInfoActivity;
 import com.freelance.anantahairstudioadmin.databinding.ActivityAllServicesBinding;
+import com.freelance.anantahairstudioadmin.home.HomeActivity;
 import com.freelance.anantahairstudioadmin.utils.PrefManager;
 
 import java.util.ArrayList;
@@ -67,5 +69,12 @@ public class AllServicesActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(AllServicesActivity.this, HomeActivity.class));
+        finish();
     }
 }

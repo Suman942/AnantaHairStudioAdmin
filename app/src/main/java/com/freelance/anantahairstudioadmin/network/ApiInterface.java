@@ -4,6 +4,7 @@ package com.freelance.anantahairstudioadmin.network;
 
 import com.freelance.anantahairstudioadmin.addService.pojo.ServicesResponse;
 import com.freelance.anantahairstudioadmin.addService.pojo.UpdateServiceResponse;
+import com.freelance.anantahairstudioadmin.adminInfo.ContactUpdateResponse;
 import com.freelance.anantahairstudioadmin.allBooking.response.AcceptBookingResponse;
 import com.freelance.anantahairstudioadmin.allBooking.response.AllBookingResponse;
 import com.freelance.anantahairstudioadmin.allBooking.response.BookingDetailsResponse;
@@ -128,5 +129,14 @@ public interface ApiInterface {
             @Field("phone") String phone,
             @Field("whatsapp") String whatsapp,
             @Field("email") String email
+    );
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @GET("fetch?business_info=1")
+    Call<ContactUpdateResponse> getAdminDetails(
+          @Header("Authorization") String token
     );
 }

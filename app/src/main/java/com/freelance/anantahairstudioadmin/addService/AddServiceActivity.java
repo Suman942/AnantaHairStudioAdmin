@@ -16,6 +16,7 @@ import com.freelance.anantahairstudioadmin.R;
 import com.freelance.anantahairstudioadmin.addService.pojo.UpdateServiceResponse;
 import com.freelance.anantahairstudioadmin.addService.viewModel.ServicesViewModel;
 import com.freelance.anantahairstudioadmin.databinding.ActivityAddServiceBinding;
+import com.freelance.anantahairstudioadmin.home.HomeActivity;
 
 public class AddServiceActivity extends AppCompatActivity {
 
@@ -103,5 +104,12 @@ public class AddServiceActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(AddServiceActivity.this, AllServicesActivity.class));
+        finish();
     }
 }

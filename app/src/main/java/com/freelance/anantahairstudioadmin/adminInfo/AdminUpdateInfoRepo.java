@@ -1,5 +1,7 @@
 package com.freelance.anantahairstudioadmin.adminInfo;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.freelance.anantahairstudioadmin.addService.pojo.UpdateServiceResponse;
@@ -33,12 +35,30 @@ public class AdminUpdateInfoRepo {
             @Override
             public void onResponse(Call<UpdateServiceResponse> call, Response<UpdateServiceResponse> response) {
                 if (response.code() == 200){
+                    Log.i("info","updated");
                     mutableLiveData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<UpdateServiceResponse> call, Throwable t) {
+                Log.i("info",""+t.getMessage());
+                mutableLiveData.setValue(null);
+            }
+        });
+    }
+
+    public void adminInfo(String token,MutableLiveData<ContactUpdateResponse> mutableLiveData){
+        apiInterface.getAdminDetails(token).enqueue(new Callback<ContactUpdateResponse>() {
+            @Override
+            public void onResponse(Call<ContactUpdateResponse> call, Response<ContactUpdateResponse> response) {
+                if (response.code() == 200){
+                    mutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContactUpdateResponse> call, Throwable t) {
                 mutableLiveData.setValue(null);
             }
         });

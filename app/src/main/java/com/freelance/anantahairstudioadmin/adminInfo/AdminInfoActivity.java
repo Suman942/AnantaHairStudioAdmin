@@ -14,6 +14,7 @@ import com.freelance.anantahairstudioadmin.R;
 import com.freelance.anantahairstudioadmin.addService.pojo.UpdateServiceResponse;
 import com.freelance.anantahairstudioadmin.databinding.ActivityAdminInfoBinding;
 import com.freelance.anantahairstudioadmin.home.HomeActivity;
+import com.freelance.anantahairstudioadmin.utils.PrefManager;
 
 public class AdminInfoActivity extends AppCompatActivity {
     ActivityAdminInfoBinding binding;
@@ -25,6 +26,11 @@ public class AdminInfoActivity extends AppCompatActivity {
        adminInfoViewModel = new ViewModelProvider(this).get(AdminInfoViewModel.class);
        clickView();
        observer();
+       fetchData();
+    }
+
+    private void fetchData() {
+        adminInfoViewModel.getAdminDetails(PrefManager.getInstance().getString(R.string.authToken));
     }
 
     private void observer() {
@@ -33,8 +39,25 @@ public class AdminInfoActivity extends AppCompatActivity {
             public void onChanged(UpdateServiceResponse updateServiceResponse) {
                 if (updateServiceResponse.getData() != null){
                     Toast.makeText(AdminInfoActivity.this, "Successfully updated", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(AdminInfoActivity.this, HomeActivity.class));
-                    finish();
+//                    startActivity(new Intent(AdminInfoActivity.this, HomeActivity.class));
+//                    finish();
+                    adminInfoViewModel.getAdminDetails(PrefManager.getInstance().getString(R.string.authToken));
+
+                }
+            }
+        });
+
+        adminInfoViewModel.getAdminDetailsLiveData().observe(this, new Observer<ContactUpdateResponse>() {
+            @Override
+            public void onChanged(ContactUpdateResponse contactUpdateResponse) {
+                try {
+                    binding.phone.setText(contactUpdateResponse.getData().getBusinessInfo().getPhone());
+                    binding.watzapp.setText(contactUpdateResponse.getData().getBusinessInfo().getWhatsapp());
+                    binding.email.setText(contactUpdateResponse.getData().getBusinessInfo().getEmail());
+                    binding.loader.setVisibility(View.GONE);
+                }
+                catch (Exception e){
+                    binding.loader.setVisibility(View.GONE);
                 }
             }
         });
@@ -48,5 +71,12 @@ public class AdminInfoActivity extends AppCompatActivity {
                         binding.watzapp.getText().toString(),binding.email.getText().toString());
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(AdminInfoActivity.this, HomeActivity.class));
+        finish();
     }
 }
