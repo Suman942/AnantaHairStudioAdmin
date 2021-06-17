@@ -41,6 +41,7 @@ public class AdminInfoActivity extends AppCompatActivity {
                     Toast.makeText(AdminInfoActivity.this, "Successfully updated", Toast.LENGTH_SHORT).show();
 //                    startActivity(new Intent(AdminInfoActivity.this, HomeActivity.class));
 //                    finish();
+                    binding.update.setEnabled(true);
                     adminInfoViewModel.getAdminDetails(PrefManager.getInstance().getString(R.string.authToken));
 
                 }
@@ -69,6 +70,8 @@ public class AdminInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 adminInfoViewModel.updateAdminInfo("","","",binding.phone.getText().toString(),
                         binding.watzapp.getText().toString(),binding.email.getText().toString());
+
+                binding.update.setEnabled(false);
             }
         });
     }

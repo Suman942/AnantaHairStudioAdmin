@@ -41,9 +41,9 @@ public class BookingDetailsResponse {
         @SerializedName("phone")
         @Expose
         private String phone;
-//        @SerializedName("name")
-//        @Expose
-//        private Object name;
+        @SerializedName("name")
+        @Expose
+        private String name;
         @SerializedName("services")
         @Expose
         private List<Service> services = null;
@@ -104,13 +104,13 @@ public class BookingDetailsResponse {
             this.phone = phone;
         }
 
-//        public Object getName() {
-//            return name;
-//        }
-//
-//        public void setName(Object name) {
-//            this.name = name;
-//        }
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
 
         public List<Service> getServices() {
             return services;

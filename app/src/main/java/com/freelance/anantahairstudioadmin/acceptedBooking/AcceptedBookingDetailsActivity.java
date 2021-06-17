@@ -54,6 +54,14 @@ public class AcceptedBookingDetailsActivity extends AppCompatActivity {
                 allBookingViewModel.closeBooking(bookingId);
             }
         });
+        binding.billGenerate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AcceptedBookingDetailsActivity.this,InvoiceActivity.class);
+                intent.putExtra("bookingId",bookingId);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getIntentData() {
@@ -67,6 +75,19 @@ public class AcceptedBookingDetailsActivity extends AppCompatActivity {
             @Override
             public void onChanged(BookingDetailsResponse bookingDetailsResponse) {
                 if (bookingDetailsResponse != null){
+                    try {
+                        if (bookingDetailsResponse.getData().getName() != null) {
+                            binding.name.setText("Name: " + bookingDetailsResponse.getData().getName());
+                        } else {
+                            binding.name.setText("Name: N/A");
+                        }
+                        if (bookingDetailsResponse.getData().getPhone() != null) {
+                            binding.phone.setText("Contact: " + bookingDetailsResponse.getData().getPhone());
+                        } else {
+                            binding.phone.setText("Contact: N/A");
+                        }
+                    } catch (Exception e) {
+                    }
                     binding.bookingId.setText("BookingId: #"+bookingDetailsResponse.getData().getId());
                     long slot = Long.parseLong(bookingDetailsResponse.getData().getSlot());
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -75,6 +96,8 @@ public class AcceptedBookingDetailsActivity extends AppCompatActivity {
                     binding.timeTxt.setText("Time: "+ LocalTime.getLocalTime(slot));
 
                     serviceArrayList.addAll(bookingDetailsResponse.getData().getServices());
+                    binding.loader.setVisibility(View.GONE);
+
                     adapter.notifyDataSetChanged();
                 }
             }

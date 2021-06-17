@@ -35,15 +35,16 @@ public class BookingDetailsActivity extends AppCompatActivity {
     ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList = new ArrayList<>();
     NotificationViewModel notificationViewModel;
     String topic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      binding = DataBindingUtil.setContentView(this,R.layout.activity_booking_details);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_booking_details);
         notificationViewModel = new ViewModelProvider(this).get(NotificationViewModel.class);
         getIntentData();
-      initialise();
-      observer();
-      clickViews();
+        initialise();
+        observer();
+        clickViews();
     }
 
     private void clickViews() {
@@ -71,15 +72,30 @@ public class BookingDetailsActivity extends AppCompatActivity {
         allBookingViewModel.bookingDetailsLiveData().observe(this, new Observer<BookingDetailsResponse>() {
             @Override
             public void onChanged(BookingDetailsResponse bookingDetailsResponse) {
-                if (bookingDetailsResponse != null){
-                    binding.bookingId.setText("BookingId: #"+bookingDetailsResponse.getData().getId());
+                if (bookingDetailsResponse != null) {
+                    try {
+                        if (bookingDetailsResponse.getData().getName() != null) {
+                            binding.name.setText("Name: " + bookingDetailsResponse.getData().getName());
+                        } else {
+                            binding.name.setText("Name: N/A");
+                        }
+                        if (bookingDetailsResponse.getData().getPhone() != null) {
+                            binding.phone.setText("Contact: " + bookingDetailsResponse.getData().getPhone());
+                        } else {
+                            binding.phone.setText("Contact: N/A");
+                        }
+                    } catch (Exception e) {
+                    }
+                    binding.bookingId.setText("BookingId: #" + bookingDetailsResponse.getData().getId());
                     long slot = Long.parseLong(bookingDetailsResponse.getData().getSlot());
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     String dateString = formatter.format(new Date(slot));
-                    binding.dateTxt.setText("Date: "+dateString);
-                    binding.timeTxt.setText("Time: "+ LocalTime.getLocalTime(slot));
-                    topic = bookingDetailsResponse.getData().getEmail().substring(0,bookingDetailsResponse.getData().getEmail().indexOf("@")).trim();
+                    binding.dateTxt.setText("Date: " + dateString);
+                    binding.timeTxt.setText("Time: " + LocalTime.getLocalTime(slot));
+                    topic = bookingDetailsResponse.getData().getEmail().substring(0, bookingDetailsResponse.getData().getEmail().indexOf("@")).trim();
                     serviceArrayList.addAll(bookingDetailsResponse.getData().getServices());
+
+                    binding.loader.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -87,10 +103,9 @@ public class BookingDetailsActivity extends AppCompatActivity {
         allBookingViewModel.acceptBookingLiveData().observe(this, new Observer<AcceptBookingResponse>() {
             @Override
             public void onChanged(AcceptBookingResponse acceptBookingResponse) {
-                if (acceptBookingResponse.getData() != null){
+                if (acceptBookingResponse.getData() != null) {
                     Toast.makeText(BookingDetailsActivity.this, "Booking accepted successfully", Toast.LENGTH_SHORT).show();
-                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/"+topic, "Booking Accepted", "BookingId: "+bookingId,R.drawable.main_logo));
-
+                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/" + topic, "Booking Accepted", "BookingId: " + bookingId, R.drawable.main_logo));
                     startActivity(new Intent(BookingDetailsActivity.this, AllBookingsActivity.class));
                     finish();
                 }
@@ -100,7 +115,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         allBookingViewModel.rejectBookingLiveData().observe(this, new Observer<AcceptBookingResponse>() {
             @Override
             public void onChanged(AcceptBookingResponse acceptBookingResponse) {
-                if (acceptBookingResponse.getData() != null){
+                if (acceptBookingResponse.getData() != null) {
                     Toast.makeText(BookingDetailsActivity.this, "Booking rejected successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(BookingDetailsActivity.this, AllBookingsActivity.class));
                     finish();
@@ -112,7 +127,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
     private void initialise() {
         allBookingViewModel = new ViewModelProvider(this).get(AllBookingViewModel.class);
-        adapter = new BookingDetailsAdapter(this,serviceArrayList);
+        adapter = new BookingDetailsAdapter(this, serviceArrayList);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
     }

@@ -14,6 +14,7 @@ import com.freelance.anantahairstudioadmin.adminInfo.AdminInfoActivity;
 import com.freelance.anantahairstudioadmin.allBooking.AllBookingsActivity;
 import com.freelance.anantahairstudioadmin.acceptedBooking.AcceptedBookingActivity;
 import com.freelance.anantahairstudioadmin.databinding.ActivityHomeBinding;
+import com.freelance.anantahairstudioadmin.gallery.AllPicsActivity;
 
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding binding;
@@ -52,6 +53,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, AdminInfoActivity.class));
+                finish();
+            }
+        });
+
+        binding.gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, AllPicsActivity.class));
                 finish();
             }
         });

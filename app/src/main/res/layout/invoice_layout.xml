@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Service"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/quantity"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/service"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Quantity"
+        android:textSize="14sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toRightOf="@id/service"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/red"
+        app:layout_constraintRight_toLeftOf="@id/discount"
+        android:id="@+id/quantity"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Discount"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        app:layout_constraintLeft_toRightOf="@id/quantity"
+        app:layout_constraintRight_toLeftOf="@id/price"
+        android:layout_marginLeft="5dp"
+        android:textColor="#00E994"
+        android:id="@+id/discount"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="500"
+        android:textSize="14sp"
+        android:gravity="center"
+        app:layout_constraintLeft_toRightOf="@id/discount"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="5dp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/price"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,10 +8,12 @@ import com.freelance.anantahairstudioadmin.adminInfo.ContactUpdateResponse;
 import com.freelance.anantahairstudioadmin.allBooking.response.AcceptBookingResponse;
 import com.freelance.anantahairstudioadmin.allBooking.response.AllBookingResponse;
 import com.freelance.anantahairstudioadmin.allBooking.response.BookingDetailsResponse;
+import com.freelance.anantahairstudioadmin.gallery.FetchGalleryResponse;
 import com.freelance.anantahairstudioadmin.notification.FcmResponse;
 import com.freelance.anantahairstudioadmin.signup.Authentication;
 import com.google.gson.JsonObject;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -19,7 +21,9 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -138,5 +142,23 @@ public interface ApiInterface {
     @GET("fetch?business_info=1")
     Call<ContactUpdateResponse> getAdminDetails(
           @Header("Authorization") String token
+    );
+
+    @Headers({
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @Multipart
+    @POST("admin/gallery")
+    Call<UpdateServiceResponse> uploadPic(
+            @Part MultipartBody.Part file);
+
+
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @GET("fetch?gallery")
+    Call<FetchGalleryResponse> getGalleryPic(
+            @Header("Authorization") String token
     );
 }
