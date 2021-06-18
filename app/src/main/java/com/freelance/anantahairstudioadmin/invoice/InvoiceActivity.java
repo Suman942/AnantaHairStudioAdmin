@@ -36,17 +36,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class InvoiceActivity extends AppCompatActivity {
+public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter.Callback{
     ActivityInvoiceBinding binding;
     AllBookingViewModel allBookingViewModel;
     ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList = new ArrayList<>();
     InvoiceAdapter adapter;
     String bookingId;
-    int totalDiscount,totalPrice;
+    int totalDiscount, totalPrice;
+     int priceWithIndividual;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      binding = DataBindingUtil.setContentView(this,R.layout.activity_invoice);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice);
         allBookingViewModel = new ViewModelProvider(this).get(AllBookingViewModel.class);
         bookingId = getIntent().getStringExtra("bookingId");
         initialise();
@@ -67,36 +68,34 @@ public class InvoiceActivity extends AppCompatActivity {
         Bitmap bitmap = getBitmapFromView(binding.invooice);
 
         try {
-            File file = new File(getExternalCacheDir(),"Invoice.png");
+            File file = new File(getExternalCacheDir(), "Invoice.png");
             FileOutputStream fOut = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,fOut);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
             fOut.flush();
             fOut.close();
-            file.setReadable(true,false);
+            file.setReadable(true, false);
             Uri imageUri = FileProvider.getUriForFile(
                     InvoiceActivity.this,
                     "com.freelance.anantahairstudioadmin.provider", //(use your app signature + ".provider" )
                     file);
             final Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(Intent.EXTRA_STREAM,imageUri);
+            intent.putExtra(Intent.EXTRA_STREAM, imageUri);
             intent.setType("image/*");
-            startActivity(Intent.createChooser(intent,"Share ia"));
-        }
-        catch (Exception e){
-            Log.e("shareError"," "+e.getMessage());
+            startActivity(Intent.createChooser(intent, "Share ia"));
+        } catch (Exception e) {
+            Log.e("shareError", " " + e.getMessage());
 //            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
     private Bitmap getBitmapFromView(View view) {
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(),view.getHeight(),Bitmap.Config.ARGB_8888);
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(returnedBitmap);
         Drawable bgDrawable = view.getBackground();
-        if (bgDrawable != null){
+        if (bgDrawable != null) {
             bgDrawable.draw(canvas);
-        }
-        else {
+        } else {
             canvas.drawColor(Color.WHITE);
         }
         view.draw(canvas);
@@ -104,29 +103,19 @@ public class InvoiceActivity extends AppCompatActivity {
     }
 
     private void initialise() {
-        adapter = new InvoiceAdapter(this, serviceArrayList);
+        adapter = new InvoiceAdapter(this, serviceArrayList,this::totalPrice);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
     }
+
     private void observer() {
         allBookingViewModel.bookingDetails(bookingId);
         allBookingViewModel.bookingDetailsLiveData().observe(this, new Observer<BookingDetailsResponse>() {
             @Override
             public void onChanged(BookingDetailsResponse bookingDetailsResponse) {
                 if (bookingDetailsResponse != null) {
-
                     serviceArrayList.addAll(bookingDetailsResponse.getData().getServices());
-
-                    for (int position = 0; position < serviceArrayList.size();position++) {
-                         totalPrice += Integer.parseInt(serviceArrayList.get(position).getPrice());
-                         totalDiscount += Integer.parseInt(serviceArrayList.get(position).getDiscountedPrice());
-                    }
-                    binding.price.setText("\u20B9 "+String.valueOf(totalPrice));
-                    binding.discount.setText("\u20B9 "+String.valueOf(totalDiscount) );
-                    int finalAmount = totalPrice - totalDiscount;
-                    binding.amount.setText("\u20B9 "+String.valueOf(finalAmount));
-
-//                    binding.loader.setVisibility(View.GONE);
+                    binding.loader.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -134,4 +123,11 @@ public class InvoiceActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void totalPrice(int totalPrice, int totalDiscount, int subtotal) {
+        binding.price.setText("\u20B9 " + String.valueOf(totalPrice));
+        binding.discount.setText("\u20B9 " + String.valueOf(totalDiscount));
+        binding.amount.setText("\u20B9 " + String.valueOf(subtotal));
+
+    }
 }

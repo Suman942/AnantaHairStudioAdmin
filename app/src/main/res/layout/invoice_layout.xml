@@ -12,7 +12,7 @@
         android:textSize="14sp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="5dp"
-        android:gravity="center"
+        android:gravity="start"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/quantity"
         android:layout_marginLeft="5dp"
@@ -25,10 +25,11 @@
         android:text="Quantity"
         android:textSize="14sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toTopOf="@id/service"
+        app:layout_constraintBottom_toBottomOf="@id/service"
         app:layout_constraintLeft_toRightOf="@id/service"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:textColor="@color/red"
         app:layout_constraintRight_toLeftOf="@id/discount"
         android:id="@+id/quantity"/>
@@ -38,27 +39,35 @@
         android:layout_height="wrap_content"
         android:text="Discount"
         android:textSize="14sp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toTopOf="@id/service"
+        app:layout_constraintBottom_toBottomOf="@id/service"
         android:gravity="center"
         app:layout_constraintLeft_toRightOf="@id/quantity"
         app:layout_constraintRight_toLeftOf="@id/price"
         android:layout_marginLeft="5dp"
         android:textColor="#00E994"
+        android:layout_marginRight="5dp"
         android:id="@+id/discount"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="500"
         android:textSize="14sp"
-        android:gravity="center"
+        android:gravity="end"
+        android:text="Price"
         app:layout_constraintLeft_toRightOf="@id/discount"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toTopOf="@id/service"
+        app:layout_constraintBottom_toBottomOf="@id/service"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="5dp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/price"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/service"
+        android:background="#eee"
+        android:layout_marginTop="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
