@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,17 +14,16 @@ import android.util.Log;
 import android.view.View;
 
 import com.freelance.anantahairstudioadmin.R;
-import com.freelance.anantahairstudioadmin.allBooking.adapter.AllBookingAdapter;
 import com.freelance.anantahairstudioadmin.allBooking.response.AllBookingResponse;
 import com.freelance.anantahairstudioadmin.allBooking.viewModel.AllBookingViewModel;
-import com.freelance.anantahairstudioadmin.databinding.ActivityAcceptedBookingBinding;
+import com.freelance.anantahairstudioadmin.databinding.ActivityBookingHistoryBinding;
 import com.freelance.anantahairstudioadmin.home.HomeActivity;
 
 import java.util.ArrayList;
 
-public class AcceptedBookingActivity extends AppCompatActivity {
+public class BookingHistoryActivity extends AppCompatActivity {
 
-    ActivityAcceptedBookingBinding binding;
+    ActivityBookingHistoryBinding binding;
     AcceptedBookingAdapter bookingAdapter;
     AllBookingViewModel allBookingViewModel;
     ArrayList<AllBookingResponse.Data.Result> bookingList = new ArrayList<>();
@@ -36,7 +34,7 @@ public class AcceptedBookingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_accepted_booking);
+       binding = DataBindingUtil.setContentView(this,R.layout.activity_booking_history);
         binding.bookingRecyclerView.setEmptyView(binding.emptyText);
         initialise();
         mLayoutManager = new LinearLayoutManager(this);
@@ -60,7 +58,7 @@ public class AcceptedBookingActivity extends AppCompatActivity {
                         Log.i("page", "pageNo: " + page);
                         Log.i("data", "response1: ");
 
-                        allBookingViewModel.allAcceptedBookings("accepted","1",String.valueOf(page));
+                        allBookingViewModel.bookingHistory("closed","1",String.valueOf(page));
                         binding.paginationLoader.setVisibility(View.VISIBLE);
                     }
                 }
@@ -68,9 +66,9 @@ public class AcceptedBookingActivity extends AppCompatActivity {
         });
     }
     private void observer() {
-        allBookingViewModel.allAcceptedBookings("accepted","1",String.valueOf(page));
+        allBookingViewModel.bookingHistory("closed","1",String.valueOf(page));
 
-        allBookingViewModel.allAcceptedBookingsLiveData().observe(this, new Observer<AllBookingResponse>() {
+        allBookingViewModel.bookingHistoryLiveData().observe(this, new Observer<AllBookingResponse>() {
             @Override
             public void onChanged(AllBookingResponse allBookingResponse) {
                 if (allBookingResponse.getData().getResults() != null) {
@@ -97,7 +95,7 @@ public class AcceptedBookingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(AcceptedBookingActivity.this, HomeActivity.class));
+        startActivity(new Intent(BookingHistoryActivity.this, HomeActivity.class));
         finish();
     }
 }

@@ -139,6 +139,7 @@ public class SignUpActivity extends AppCompatActivity {
         if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
             finish();
+            Log.i("authentication","token: "+PrefManager.getInstance().getString(R.string.authToken));
 
         }
     }

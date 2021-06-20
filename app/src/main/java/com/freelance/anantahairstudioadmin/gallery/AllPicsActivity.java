@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.freelance.anantahairstudioadmin.R;
 import com.freelance.anantahairstudioadmin.addService.pojo.UpdateServiceResponse;
 import com.freelance.anantahairstudioadmin.databinding.ActivityAllPicsBinding;
+import com.freelance.anantahairstudioadmin.home.HomeActivity;
 import com.freelance.anantahairstudioadmin.utils.PrefManager;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -30,7 +31,7 @@ public class AllPicsActivity extends AppCompatActivity {
     GalleryViewModel galleryViewModel;
     GalleryAdapter adapter;
     ArrayList<FetchGalleryResponse.Data.Image> imageList = new ArrayList<>();
-    String url = null;
+     String url = "https://xbytelab.com/projects/ananta-salon/image/gallery/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +40,10 @@ public class AllPicsActivity extends AppCompatActivity {
 
         observer();
         clickView();
-        initialise();
         binding.recyclerView.setEmptyView(binding.empty);
 
     }
 
-    private void initialise() {
-
-    }
 
     private void clickView() {
         binding.add.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +63,6 @@ public class AllPicsActivity extends AppCompatActivity {
             public void onChanged(FetchGalleryResponse fetchGalleryResponse) {
                 imageList.clear();
                 imageList.addAll(fetchGalleryResponse.getData().getImages());
-                url = fetchGalleryResponse.getData().getBaseUrl();
                 Log.i("file","2: "+url);
                 adapter = new GalleryAdapter(getApplicationContext(),imageList,url);
                 binding.recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
@@ -112,5 +108,11 @@ public class AllPicsActivity extends AppCompatActivity {
                 binding.loader.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(AllPicsActivity.this, HomeActivity.class));
     }
 }

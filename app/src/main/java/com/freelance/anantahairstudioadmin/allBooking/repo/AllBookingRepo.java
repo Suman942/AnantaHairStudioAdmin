@@ -27,8 +27,8 @@ public class AllBookingRepo {
         return allBookingRepo;
     }
 
-    public void allBooking(String status, String fetch, MutableLiveData<AllBookingResponse>mutableLiveData){
-        apiInterface.allBooking(status,fetch).enqueue(new Callback<AllBookingResponse>() {
+    public void allBooking(String status, String fetch,String page ,MutableLiveData<AllBookingResponse>mutableLiveData){
+        apiInterface.allBooking(status,fetch,page).enqueue(new Callback<AllBookingResponse>() {
             @Override
             public void onResponse(Call<AllBookingResponse> call, Response<AllBookingResponse> response) {
                 if (response.code() == 200){

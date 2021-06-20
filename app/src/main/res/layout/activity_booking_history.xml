@@ -6,9 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".acceptedBooking.AcceptedBookingActivity">
-
-
+    tools:context=".acceptedBooking.BookingHistoryActivity">
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gL"
         android:layout_width="wrap_content"
@@ -29,7 +27,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Accepted Booking" />
+        app:title="Booking history" />
 
     <com.freelance.anantahairstudioadmin.utils.EmptyRecyclerView
         android:id="@+id/bookingRecyclerView"
@@ -44,7 +42,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No booking available"
+        android:text="No booking history available"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:id="@+id/emptyText"

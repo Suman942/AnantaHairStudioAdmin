@@ -15,17 +15,28 @@ public class AllBookingViewModel extends ViewModel {
     MutableLiveData<AcceptBookingResponse> acceptBookingResponseMutableLiveData = new MutableLiveData<>();
     MutableLiveData<AcceptBookingResponse> rejectBookingResponseMutableLiveData = new MutableLiveData<>();
     MutableLiveData<AcceptBookingResponse> closeBookingResponseMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<AllBookingResponse> bookingHistoryMutableLiveData = new MutableLiveData<>();
 
-    public void allBookings(String status,String fetch){
-        AllBookingRepo.getInstance().allBooking(status,fetch,allBookingResponseMutableLiveData);
+
+    public void bookingHistory(String status,String fetch,String page){
+        AllBookingRepo.getInstance().allBooking(status,fetch,page,bookingHistoryMutableLiveData);
+    }
+
+    public MutableLiveData<AllBookingResponse> bookingHistoryLiveData(){
+        return bookingHistoryMutableLiveData;
+    }
+
+
+    public void allBookings(String status,String fetch,String page){
+        AllBookingRepo.getInstance().allBooking(status,fetch,page,allBookingResponseMutableLiveData);
     }
 
     public MutableLiveData<AllBookingResponse> allBookingsLiveData(){
         return allBookingResponseMutableLiveData;
     }
 
-    public void allAcceptedBookings(String status,String fetch){
-        AllBookingRepo.getInstance().allBooking(status,fetch,acceptedBookingLiveData);
+    public void allAcceptedBookings(String status,String fetch,String page){
+        AllBookingRepo.getInstance().allBooking(status,fetch,page,acceptedBookingLiveData);
     }
 
     public MutableLiveData<AllBookingResponse> allAcceptedBookingsLiveData(){

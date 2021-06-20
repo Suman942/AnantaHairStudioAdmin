@@ -1,14 +1,17 @@
 package com.freelance.anantahairstudioadmin.allBooking;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.freelance.anantahairstudioadmin.R;
@@ -26,47 +29,81 @@ public class AllBookingsActivity extends AppCompatActivity {
     AllBookingAdapter bookingAdapter;
     AllBookingViewModel allBookingViewModel;
     ArrayList<AllBookingResponse.Data.Result> bookingList = new ArrayList<>();
+    int totalItems, scrollOutItems, currentVisibleItems;
+    LinearLayoutManager mLayoutManager;
+    boolean isLoading = false;
+    int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      binding = DataBindingUtil.setContentView(this,R.layout.activity_all_bookings);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_all_bookings);
 
-      binding.bookingRecyclerView.setEmptyView(binding.emptyText);
-      initialise();
-      allBookingViewModel.allBookings("new","1");
-      binding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-          @Override
-          public void onRefresh() {
-              bookingList.clear();
-              allBookingViewModel.allBookings("new","1");
-          }
-      });
-      observer();
+        binding.bookingRecyclerView.setEmptyView(binding.emptyText);
+        initialise();
+        mLayoutManager = new LinearLayoutManager(this);
+        binding.bookingRecyclerView.setLayoutManager(mLayoutManager);
+        observer();
+
+        allBookingViewModel.allBookings("new", "1",String.valueOf(page));
+        binding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                bookingList.clear();
+                page = 1;
+                allBookingViewModel.allBookings("new", "1",String.valueOf(page));
+            }
+        });
+
+        binding.bookingRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (!isLoading ) {
+                    currentVisibleItems = mLayoutManager.getChildCount();
+                    totalItems = mLayoutManager.getItemCount();
+                    scrollOutItems = mLayoutManager.findFirstVisibleItemPosition();
+                    if ((currentVisibleItems + scrollOutItems == totalItems)) {
+
+                        isLoading = true;
+                        page++;
+                        Log.i("page", "pageNo: " + page);
+                        Log.i("data", "response1: ");
+
+                        allBookingViewModel.allBookings("new", "1",String.valueOf(page));
+                        binding.paginationLoader.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
     }
 
     private void observer() {
         allBookingViewModel.allBookingsLiveData().observe(this, new Observer<AllBookingResponse>() {
             @Override
             public void onChanged(AllBookingResponse allBookingResponse) {
-              if (allBookingResponse.getData().getResults() != null) {
-                  bookingList.addAll(allBookingResponse.getData().getResults());
-                  bookingAdapter.notifyDataSetChanged();
-                  binding.loader.setVisibility(View.GONE);
-                  binding.swipe.setRefreshing(false);
-              }
-              else if (allBookingResponse.getData().getResults().size() == 0){
-                  binding.loader.setVisibility(View.GONE);
-                  binding.swipe.setRefreshing(false);
-              }
+                if (allBookingResponse.getData().getResults() != null) {
+                    bookingList.addAll(allBookingResponse.getData().getResults());
+                    bookingAdapter.notifyDataSetChanged();
+                    binding.loader.setVisibility(View.GONE);
+                    binding.swipe.setRefreshing(false);
+                    isLoading = false;
+                    binding.paginationLoader.setVisibility(View.GONE);
+
+                } else if (allBookingResponse.getData().getResults().size() == 0) {
+                    binding.loader.setVisibility(View.GONE);
+                    binding.swipe.setRefreshing(false);
+                    binding.paginationLoader.setVisibility(View.GONE);
+
+                }
             }
         });
     }
 
     private void initialise() {
         allBookingViewModel = new ViewModelProvider(this).get(AllBookingViewModel.class);
-        bookingAdapter = new AllBookingAdapter(this,bookingList);
-        binding.bookingRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        bookingAdapter = new AllBookingAdapter(this, bookingList);
         binding.bookingRecyclerView.setAdapter(bookingAdapter);
     }
 

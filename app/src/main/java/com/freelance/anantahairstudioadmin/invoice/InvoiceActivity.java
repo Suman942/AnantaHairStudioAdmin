@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.freelance.anantahairstudioadmin.R;
+import com.freelance.anantahairstudioadmin.acceptedBooking.AcceptedBookingDetailsActivity;
 import com.freelance.anantahairstudioadmin.allBooking.AllBookingsActivity;
 import com.freelance.anantahairstudioadmin.allBooking.BookingDetailsActivity;
 import com.freelance.anantahairstudioadmin.allBooking.adapter.BookingDetailsAdapter;
@@ -42,8 +44,8 @@ public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter
     ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList = new ArrayList<>();
     InvoiceAdapter adapter;
     String bookingId;
-    int totalDiscount, totalPrice;
-     int priceWithIndividual;
+  ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +108,10 @@ public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter
         adapter = new InvoiceAdapter(this, serviceArrayList,this::totalPrice);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Invoice Generating");
+        progressDialog.setMessage("Please wait....");
+        progressDialog.show();
     }
 
     private void observer() {
@@ -115,8 +121,8 @@ public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter
             public void onChanged(BookingDetailsResponse bookingDetailsResponse) {
                 if (bookingDetailsResponse != null) {
                     serviceArrayList.addAll(bookingDetailsResponse.getData().getServices());
-                    binding.loader.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
                 }
             }
         });
@@ -129,5 +135,12 @@ public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter
         binding.discount.setText("\u20B9 " + String.valueOf(totalDiscount));
         binding.amount.setText("\u20B9 " + String.valueOf(subtotal));
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(InvoiceActivity.this, AcceptedBookingDetailsActivity.class));
+        finish();
     }
 }

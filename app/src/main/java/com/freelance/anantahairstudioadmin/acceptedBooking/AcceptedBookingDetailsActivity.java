@@ -34,7 +34,7 @@ public class AcceptedBookingDetailsActivity extends AppCompatActivity {
     ArrayList<BookingDetailsResponse.Data.Service> serviceArrayList = new ArrayList<>();
     String bookingId;
     AllBookingViewModel allBookingViewModel;
-
+    boolean from;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +66,17 @@ public class AcceptedBookingDetailsActivity extends AppCompatActivity {
 
     private void getIntentData() {
         bookingId = getIntent().getStringExtra("bookingId");
+        from = getIntent().getBooleanExtra("fromBookingHistory",false);
+        if (from){
+            binding.request.setVisibility(View.GONE);
+            binding.billGenerate.setVisibility(View.GONE);
+            binding.markDone.setVisibility(View.GONE);
+        }
+        else {
+            binding.request.setVisibility(View.VISIBLE);
+            binding.billGenerate.setVisibility(View.VISIBLE);
+            binding.markDone.setVisibility(View.VISIBLE);
+        }
     }
 
     private void observer() {
@@ -128,12 +139,24 @@ public class AcceptedBookingDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(AcceptedBookingDetailsActivity.this, AcceptedBookingActivity.class));
+        if (from){
+            startActivity(new Intent(AcceptedBookingDetailsActivity.this, BookingHistoryActivity.class));
+        }
+        else {
+            startActivity(new Intent(AcceptedBookingDetailsActivity.this, AcceptedBookingActivity.class));
+        }
         finish();
     }
 }

@@ -4,17 +4,23 @@
     package="com.freelance.anantahairstudioadmin">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/main_logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/main_logo"
         android:supportsRtl="true"
+        android:imeOptions="flagNoExtractUi"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
         android:theme="@style/Theme.AnantaHairStudioAdmin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".gallery.AllPicsActivity"></activity>
+        <activity android:name=".acceptedBooking.BookingHistoryActivity"></activity>
+        <activity android:name=".gallery.PhotoViewActivity" />
+        <activity android:name=".gallery.AllPicsActivity" />
         <activity android:name=".adminInfo.AdminInfoActivity" />
         <activity android:name=".addService.AllServicesActivity" />
         <activity android:name=".invoice.InvoiceActivity" />

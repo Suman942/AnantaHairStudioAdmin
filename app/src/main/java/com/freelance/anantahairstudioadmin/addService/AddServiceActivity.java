@@ -7,8 +7,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -33,6 +36,23 @@ public class AddServiceActivity extends AppCompatActivity {
         clickView();
         observer();
 
+        binding.description.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                s = binding.description.getText().toString();
+                binding.count.setText(""+s.length()+"/100");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void observer() {
@@ -51,7 +71,7 @@ public class AddServiceActivity extends AppCompatActivity {
         binding.update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                servicesViewModel.updateService(id,binding.category.getText().toString(),binding.price.getText().toString(),binding.discountPrice.getText().toString(),binding.serviceName.getText().toString(),binding.description.getText().toString());
+                servicesViewModel.updateService(id,categoryId,binding.price.getText().toString(),binding.discountPrice.getText().toString(),binding.serviceName.getText().toString(),binding.description.getText().toString());
                 binding.update.setEnabled(false);
             }
         });
@@ -70,29 +90,48 @@ public class AddServiceActivity extends AppCompatActivity {
         binding.price.setText(price);
         binding.discountPrice.setText(discountedPrice);
         binding.description.setText(info);
-        binding.category.setText(categoryId);
-//        if (categoryId.equals("1")){
-//            binding.category.setText("Haircut");
-//        }
-//
-//        if (categoryId.equals("2")){
-//            binding.category.setText("Shaving");
-//        }
-//        if (categoryId.equals("9")){
-//            binding.category.setText("Straightening");
-//        }
-//        if (categoryId.equals("8")){
-//            binding.category.setText("Facial");
-//        }
-//        if (categoryId.equals("10")){
-//            binding.category.setText("Manicure");
-//        }
-//        if (categoryId.equals("11")){
-//            binding.category.setText("Pedicure");
-//        }
-//        if (categoryId.equals("3")){
-//            binding.category.setText("Pedicure");
-//        }
+//        binding.category.setText(categoryId);
+
+        if (categoryId.equals("100")) {
+            binding.category.setText("Hair cut");
+        }
+        if (categoryId.equals("101")) {
+            binding.category.setText("Shaving");
+        }
+        if (categoryId.equals("102")) {
+            binding.category.setText("D-tan");
+        }
+        if (categoryId.equals("103")) {
+            binding.category.setText("Facial");
+        }
+
+        if (categoryId.equals("104")) {
+            binding.category.setText("Straightening");
+        }
+        if (categoryId.equals("105")) {
+            binding.category.setText("Pedicure");
+        }
+        if (categoryId.equals("106")) {
+            binding.category.setText("Bride/Groom");
+        }
+        if (categoryId.equals("107")) {
+            binding.category.setText("Manicure");
+        }
+        if (categoryId.equals("108")) {
+            binding.category.setText("Massage");
+        }
+        if (categoryId.equals("109")) {
+            binding.category.setText("Waxing");
+        }
+        if (categoryId.equals("110")) {
+            binding.category.setText("Hair");
+        }
+        if (categoryId.equals("111")) {
+            binding.category.setText("Child mundan");
+        }
+        if (categoryId.equals("112")) {
+            binding.category.setText("Eye brow");
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Category.categoryId);
         binding.category.setAdapter(adapter);
@@ -104,6 +143,52 @@ public class AddServiceActivity extends AppCompatActivity {
                 return true;
             }
         });
+        binding.category.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0){
+                    categoryId = "100";
+                }
+                if (position == 1){
+                    categoryId = "101";
+                }
+                if (position == 2){
+                    categoryId = "102";
+                }
+                if (position == 3){
+                    categoryId = "103";
+                }
+                if (position == 4){
+                    categoryId = "104";
+                }
+                if (position == 5){
+                    categoryId = "105";
+                }
+                if (position == 6){
+                    categoryId = "106";
+                }
+                if (position == 7){
+                    categoryId = "107";
+                }
+                if (position == 8){
+                    categoryId = "108";
+                }
+                if (position == 9){
+                    categoryId = "109";
+                }
+                if (position == 10){
+                    categoryId = "110";
+                }
+                if (position == 11){
+                    categoryId = "111";
+                }
+                if (position == 12){
+                    categoryId = "112";
+                }
+            }
+        });
+
+
     }
 
     @Override

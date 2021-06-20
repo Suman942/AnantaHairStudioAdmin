@@ -1,7 +1,6 @@
 package com.freelance.anantahairstudioadmin.network;
 
 
-
 import com.freelance.anantahairstudioadmin.addService.pojo.ServicesResponse;
 import com.freelance.anantahairstudioadmin.addService.pojo.UpdateServiceResponse;
 import com.freelance.anantahairstudioadmin.adminInfo.ContactUpdateResponse;
@@ -34,7 +33,9 @@ public interface ApiInterface {
     @GET("admin/booking?")
     Call<AllBookingResponse> allBooking(
             @Query("status") String status,
-            @Query("fetch") String fetch
+            @Query("fetch") String fetch,
+            @Query("page") String page
+
     );
 
     @Headers({
@@ -117,7 +118,7 @@ public interface ApiInterface {
             @Field("discounted_price") String discounted_price,
             @Field("name") String name,
             @Field("info") String info
-            );
+    );
 
 
     @Headers({
@@ -141,7 +142,7 @@ public interface ApiInterface {
     })
     @GET("fetch?business_info=1")
     Call<ContactUpdateResponse> getAdminDetails(
-          @Header("Authorization") String token
+            @Header("Authorization") String token
     );
 
     @Headers({

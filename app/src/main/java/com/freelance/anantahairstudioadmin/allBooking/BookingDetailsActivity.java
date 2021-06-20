@@ -100,6 +100,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
                 }
             }
         });
+
+
         allBookingViewModel.acceptBookingLiveData().observe(this, new Observer<AcceptBookingResponse>() {
             @Override
             public void onChanged(AcceptBookingResponse acceptBookingResponse) {

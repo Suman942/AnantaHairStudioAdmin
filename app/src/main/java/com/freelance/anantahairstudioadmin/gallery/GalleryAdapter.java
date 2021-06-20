@@ -1,6 +1,7 @@
 package com.freelance.anantahairstudioadmin.gallery;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.freelance.anantahairstudioadmin.R;
 import com.freelance.anantahairstudioadmin.utils.GlideHelper;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
 
@@ -42,15 +46,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
+         url = "https://xbytelab.com/projects/ananta-salon/image/gallery/";
 
         GlideHelper.setImageView(context,holder.galleryImg,url+imageList.get(position).getImage(),R.drawable.ic_image_placeholder);
-//        holder.galleryImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                callback.setImageToImageView(imageList.get(position).getImageUrl());
-//            }
-//        });
-        Log.i("file",""+url+imageList.get(position).getImage());
+        holder.galleryImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PhotoViewActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("position",position);
+                intent.putExtra("image",url+imageList.get(position).getImage());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

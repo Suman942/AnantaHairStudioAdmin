@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.freelance.anantahairstudioadmin.R;
 import com.freelance.anantahairstudioadmin.allBooking.BookingDetailsActivity;
 import com.freelance.anantahairstudioadmin.allBooking.response.AllBookingResponse;
+import com.freelance.anantahairstudioadmin.invoice.InvoiceAdapter;
 import com.freelance.anantahairstudioadmin.utils.LocalTime;
 import com.google.android.material.card.MaterialCardView;
 
@@ -43,10 +44,19 @@ public class AcceptedBookingAdapter extends RecyclerView.Adapter<AcceptedBooking
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, AcceptedBookingDetailsActivity.class);
-                intent.putExtra("bookingId", bookingList.get(position).getId());
-                intent.putExtra("position", position);
-                context.startActivity(intent);
+                if (bookingList.get(position).getStatus().equals("accepted")) {
+                    Intent intent = new Intent(context, AcceptedBookingDetailsActivity.class);
+                    intent.putExtra("bookingId", bookingList.get(position).getId());
+                    intent.putExtra("position", position);
+                    context.startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(context, AcceptedBookingDetailsActivity.class);
+                    intent.putExtra("bookingId", bookingList.get(position).getId());
+                    intent.putExtra("position", position);
+                    intent.putExtra("fromBookingHistory",true);
+                    context.startActivity(intent);
+                }
             }
         });
         holder.bookingId.setText("BookingId: #"+bookingList.get(position).getId());
@@ -58,6 +68,7 @@ public class AcceptedBookingAdapter extends RecyclerView.Adapter<AcceptedBooking
         holder.time.setText("Time: "+ LocalTime.getLocalTime(slot));
 
 
+
     }
 
     @Override
@@ -67,7 +78,7 @@ public class AcceptedBookingAdapter extends RecyclerView.Adapter<AcceptedBooking
 
     public class AcceptedViewHolder extends RecyclerView.ViewHolder {
         //        View statusBackground;
-        TextView time, date, bookingId, pay;
+        TextView time, date, bookingId, pay,name;
         MaterialCardView layout;
 
         public AcceptedViewHolder(@NonNull View itemView) {
