@@ -79,7 +79,7 @@ public class AdminInfoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(AdminInfoActivity.this, HomeActivity.class));
+//        startActivity(new Intent(AdminInfoActivity.this, HomeActivity.class));
         finish();
     }
 }

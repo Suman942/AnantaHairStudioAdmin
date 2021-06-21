@@ -95,7 +95,7 @@ public class BookingHistoryActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(BookingHistoryActivity.this, HomeActivity.class));
+//        startActivity(new Intent(BookingHistoryActivity.this, HomeActivity.class));
         finish();
     }
 }

@@ -162,4 +162,6 @@ public interface ApiInterface {
     Call<FetchGalleryResponse> getGalleryPic(
             @Header("Authorization") String token
     );
+
+
 }

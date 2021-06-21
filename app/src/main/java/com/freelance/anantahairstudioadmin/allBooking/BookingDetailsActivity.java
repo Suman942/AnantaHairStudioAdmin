@@ -137,7 +137,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(BookingDetailsActivity.this, AllBookingsActivity.class));
+//        startActivity(new Intent(BookingDetailsActivity.this, AllBookingsActivity.class));
         finish();
     }
 }

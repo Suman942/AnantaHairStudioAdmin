@@ -39,14 +39,18 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
     @Override
     public void onBindViewHolder(@NonNull InvoiceViewHolder holder, int position) {
         holder.serviceName.setText(serviceArrayList.get(position).getName());
-        holder.price.setText("\u20B9 "+Integer.parseInt(serviceArrayList.get(position).getIndividuals())*Integer.parseInt(serviceArrayList.get(position).getPrice()));
-        holder.discount.setText("\u20B9 "+Integer.parseInt(serviceArrayList.get(position).getIndividuals())*Integer.parseInt(serviceArrayList.get(position).getDiscountedPrice())+" OFF");
-        holder.noOfIndividuals.setText(serviceArrayList.get(position).getIndividuals());
+        try {
+            holder.price.setText("\u20B9 "+Integer.parseInt(serviceArrayList.get(position).getIndividuals())*Integer.parseInt(serviceArrayList.get(position).getPrice()));
+            holder.discount.setText("\u20B9 "+Integer.parseInt(serviceArrayList.get(position).getIndividuals())*Integer.parseInt(serviceArrayList.get(position).getDiscountedPrice())+" OFF");
+            holder.noOfIndividuals.setText(serviceArrayList.get(position).getIndividuals());
+            price += Integer.parseInt(serviceArrayList.get(position).getIndividuals())*Integer.parseInt(serviceArrayList.get(position).getPrice());
+            discount += Integer.parseInt(serviceArrayList.get(position).getIndividuals())*Integer.parseInt(serviceArrayList.get(position).getDiscountedPrice());
+            subtotal = price - discount;
+            callback.totalPrice(price,discount,subtotal);
+        }
+        catch (Exception e){}
 
-        price += Integer.parseInt(serviceArrayList.get(position).getIndividuals())*Integer.parseInt(serviceArrayList.get(position).getPrice());
-        discount += Integer.parseInt(serviceArrayList.get(position).getIndividuals())*Integer.parseInt(serviceArrayList.get(position).getDiscountedPrice());
-        subtotal = price - discount;
-        callback.totalPrice(price,discount,subtotal);
+
 
 
     }

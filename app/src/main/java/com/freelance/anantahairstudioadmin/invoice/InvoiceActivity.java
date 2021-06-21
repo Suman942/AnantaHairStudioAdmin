@@ -64,6 +64,8 @@ public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter
                 shareInvoice();
             }
         });
+
+
     }
 
     private void shareInvoice() {
@@ -127,6 +129,8 @@ public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter
             }
         });
 
+
+
     }
 
     @Override
@@ -140,7 +144,7 @@ public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(InvoiceActivity.this, AcceptedBookingDetailsActivity.class));
+//        startActivity(new Intent(InvoiceActivity.this, AcceptedBookingDetailsActivity.class));
         finish();
     }
 }

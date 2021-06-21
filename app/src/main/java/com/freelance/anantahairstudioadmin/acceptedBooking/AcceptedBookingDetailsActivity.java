@@ -62,18 +62,18 @@ public class AcceptedBookingDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     private void getIntentData() {
         bookingId = getIntent().getStringExtra("bookingId");
         from = getIntent().getBooleanExtra("fromBookingHistory",false);
         if (from){
-            binding.request.setVisibility(View.GONE);
             binding.billGenerate.setVisibility(View.GONE);
             binding.markDone.setVisibility(View.GONE);
         }
         else {
-            binding.request.setVisibility(View.VISIBLE);
             binding.billGenerate.setVisibility(View.VISIBLE);
             binding.markDone.setVisibility(View.VISIBLE);
         }
@@ -140,22 +140,17 @@ public class AcceptedBookingDetailsActivity extends AppCompatActivity {
             }
         });
 
-        binding.request.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         if (from){
-            startActivity(new Intent(AcceptedBookingDetailsActivity.this, BookingHistoryActivity.class));
+//            startActivity(new Intent(AcceptedBookingDetailsActivity.this, BookingHistoryActivity.class));
         }
         else {
-            startActivity(new Intent(AcceptedBookingDetailsActivity.this, AcceptedBookingActivity.class));
+//            startActivity(new Intent(AcceptedBookingDetailsActivity.this, AcceptedBookingActivity.class));
         }
         finish();
     }
