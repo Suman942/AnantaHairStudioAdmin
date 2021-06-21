@@ -194,7 +194,7 @@ public class AddServiceActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        startActivity(new Intent(AddServiceActivity.this, AllServicesActivity.class));
+        startActivity(new Intent(AddServiceActivity.this, AllServicesActivity.class));
         finish();
     }
 }

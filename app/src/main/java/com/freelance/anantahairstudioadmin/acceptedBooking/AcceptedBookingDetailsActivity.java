@@ -147,7 +147,7 @@ public class AcceptedBookingDetailsActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (from){
-//            startActivity(new Intent(AcceptedBookingDetailsActivity.this, BookingHistoryActivity.class));
+            startActivity(new Intent(AcceptedBookingDetailsActivity.this, BookingHistoryActivity.class));
         }
         else {
 //            startActivity(new Intent(AcceptedBookingDetailsActivity.this, AcceptedBookingActivity.class));
