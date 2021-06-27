@@ -144,7 +144,7 @@ public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(InvoiceActivity.this, AcceptedBookingDetailsActivity.class));
+//        startActivity(new Intent(InvoiceActivity.this, AcceptedBookingDetailsActivity.class));
         finish();
     }
 }

@@ -10,6 +10,7 @@ import java.io.File;
 public class GalleryViewModel extends ViewModel {
     MutableLiveData<UpdateServiceResponse> galleryMutableLiveData = new MutableLiveData<>();
     MutableLiveData<FetchGalleryResponse> fetchGalleryResponseMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<FetchGalleryResponse> deleteImgResponseMutableLiveData = new MutableLiveData<>();
 
     public void galleryPic(File file){
         GalleryRepo.getInstance().galleryPicUpload(file,galleryMutableLiveData);
@@ -24,5 +25,14 @@ public class GalleryViewModel extends ViewModel {
     }
     public MutableLiveData<FetchGalleryResponse> fetchGalleryImgLiveData(){
         return fetchGalleryResponseMutableLiveData;
+    }
+
+
+    public void deleteImg(String image){
+        GalleryRepo.getInstance().deleteImg(image,deleteImgResponseMutableLiveData);
+    }
+
+    public MutableLiveData<FetchGalleryResponse> deleteImgLiveData(){
+        return deleteImgResponseMutableLiveData;
     }
 }

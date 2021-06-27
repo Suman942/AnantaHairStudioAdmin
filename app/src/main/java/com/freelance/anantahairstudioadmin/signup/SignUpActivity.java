@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 234;
     GoogleSignInClient googleSignInClient;
     AuthenticationLoginViewModel loginViewModel;
-
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,9 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         loginViewModel = new ViewModelProvider(this).get(AuthenticationLoginViewModel.class);
         PrefManager.getInstance(this, true);
-
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Please wait..");
         initializationOfGoogleSigninOption();
         clickViews();
         observer();
@@ -61,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
                         Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                         startActivity(intent);
                         finish();
+                        progressDialog.dismiss();
 
                     Log.i("authentication","token: "+authentication.getData().getToken());
                 }
@@ -73,6 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
         binding.googleLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
                 signIn();
             }
         });
@@ -137,8 +142,10 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() != null) {
+            progressDialog.show();
             startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
             finish();
+            progressDialog.dismiss();
             Log.i("authentication","token: "+PrefManager.getInstance().getString(R.string.authToken));
 
         }

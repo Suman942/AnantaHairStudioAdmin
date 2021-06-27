@@ -19,14 +19,15 @@ import com.freelance.anantahairstudioadmin.utils.PrefManager;
 public class AdminInfoActivity extends AppCompatActivity {
     ActivityAdminInfoBinding binding;
     AdminInfoViewModel adminInfoViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       binding = DataBindingUtil.setContentView(this,R.layout.activity_admin_info);
-       adminInfoViewModel = new ViewModelProvider(this).get(AdminInfoViewModel.class);
-       clickView();
-       observer();
-       fetchData();
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_admin_info);
+        adminInfoViewModel = new ViewModelProvider(this).get(AdminInfoViewModel.class);
+        clickView();
+        observer();
+        fetchData();
     }
 
     private void fetchData() {
@@ -37,7 +38,7 @@ public class AdminInfoActivity extends AppCompatActivity {
         adminInfoViewModel.updateAdminInfoLiveData().observe(this, new Observer<UpdateServiceResponse>() {
             @Override
             public void onChanged(UpdateServiceResponse updateServiceResponse) {
-                if (updateServiceResponse.getData() != null){
+                if (updateServiceResponse.getData() != null) {
                     Toast.makeText(AdminInfoActivity.this, "Successfully updated", Toast.LENGTH_SHORT).show();
 //                    startActivity(new Intent(AdminInfoActivity.this, HomeActivity.class));
 //                    finish();
@@ -52,12 +53,54 @@ public class AdminInfoActivity extends AppCompatActivity {
             @Override
             public void onChanged(ContactUpdateResponse contactUpdateResponse) {
                 try {
-                    binding.phone.setText(contactUpdateResponse.getData().getBusinessInfo().getPhone());
-                    binding.watzapp.setText(contactUpdateResponse.getData().getBusinessInfo().getWhatsapp());
-                    binding.email.setText(contactUpdateResponse.getData().getBusinessInfo().getEmail());
+                    if (!contactUpdateResponse.getData().getBusinessInfo().getPhone().isEmpty()) {
+                        binding.phone.setText(contactUpdateResponse.getData().getBusinessInfo().getPhone());
+                    }
+                    else {
+                        binding.phone.setText("N/A");
+                    }
+                    if (!contactUpdateResponse.getData().getBusinessInfo().getWhatsapp().isEmpty()) {
+                        binding.watzapp.setText(contactUpdateResponse.getData().getBusinessInfo().getWhatsapp());
+                    }
+                    else {
+                        binding.watzapp.setText("N/A");
+                    }
+                    if (!contactUpdateResponse.getData().getBusinessInfo().getEmail().isEmpty()) {
+                        binding.email.setText(contactUpdateResponse.getData().getBusinessInfo().getEmail());
+                    }
+                    else {
+                        binding.email.setText("N/A");
+                    }
+
+                    if (!contactUpdateResponse.getData().getBusinessInfo().getFacebook().isEmpty()) {
+                        binding.facebook.setText(contactUpdateResponse.getData().getBusinessInfo().getFacebook());
+                    }
+                    else {
+                        binding.facebook.setText("N/A");
+                    }
+
+                    if (!contactUpdateResponse.getData().getBusinessInfo().getInstagram().isEmpty()) {
+                        binding.Instagram.setText(contactUpdateResponse.getData().getBusinessInfo().getInstagram());
+                    }
+                    else {
+                        binding.Instagram.setText("N/A");
+                    }
+
+                    if (!contactUpdateResponse.getData().getBusinessInfo().getYoutube().isEmpty()) {
+                        binding.youtube.setText(contactUpdateResponse.getData().getBusinessInfo().getYoutube());
+                    }
+                    else {
+                        binding.youtube.setText("N/A");
+                    }
+
+                    if (!contactUpdateResponse.getData().getBusinessInfo().getWebsite().isEmpty()) {
+                        binding.website.setText(contactUpdateResponse.getData().getBusinessInfo().getWebsite());
+                    }
+                    else {
+                        binding.website.setText("N/A");
+                    }
                     binding.loader.setVisibility(View.GONE);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     binding.loader.setVisibility(View.GONE);
                 }
             }
@@ -68,10 +111,19 @@ public class AdminInfoActivity extends AppCompatActivity {
         binding.update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adminInfoViewModel.updateAdminInfo("","","",binding.phone.getText().toString(),
-                        binding.watzapp.getText().toString(),binding.email.getText().toString());
+                if (binding.phone.getText().toString().isEmpty() && binding.watzapp.getText().toString().isEmpty() && binding.email.getText().toString().isEmpty()
+                        && binding.facebook.getText().toString().isEmpty() && binding.Instagram.getText().toString().isEmpty() && binding.youtube.getText().toString().isEmpty()
+                        && binding.website.getText().toString().isEmpty()){
+                    Toast.makeText(AdminInfoActivity.this, "Required fields are empty", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    adminInfoViewModel.updateAdminInfo("", "", "", binding.phone.getText().toString(),
+                            binding.watzapp.getText().toString(), binding.email.getText().toString(), binding.facebook.getText().toString(),
+                            binding.Instagram.getText().toString(), binding.youtube.getText().toString(), binding.website.getText().toString());
 
-                binding.update.setEnabled(false);
+                    binding.update.setEnabled(false);
+                }
+
             }
         });
     }

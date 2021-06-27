@@ -133,7 +133,11 @@ public interface ApiInterface {
             @Field("business_data") String business_data,
             @Field("phone") String phone,
             @Field("whatsapp") String whatsapp,
-            @Field("email") String email
+            @Field("email") String email,
+            @Field("facebook") String facebook,
+            @Field("youtube") String youtube,
+            @Field("instagram") String instagram,
+            @Field("website") String website
     );
 
     @Headers({
@@ -163,5 +167,13 @@ public interface ApiInterface {
             @Header("Authorization") String token
     );
 
-
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @FormUrlEncoded
+    @POST("admin/gallery")
+    Call<FetchGalleryResponse> deletePhoto(
+            @Field("delete") String image
+    );
 }

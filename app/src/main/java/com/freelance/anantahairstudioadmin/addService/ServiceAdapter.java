@@ -39,8 +39,57 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
 
         GlideHelper.setImageView(context,holder.serviceImg,"",R.drawable.ic_image_placeholder);
-        if (serviceList.get(position).getCategoryId().equals("1")) {
+        if (serviceList.get(position).getCategoryId().equals("100")) {
+            holder.categoryTxt.setText("Hair cut");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("101")) {
+            holder.categoryTxt.setText("Shaving");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("102")) {
+            holder.categoryTxt.setText("D-tan");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("103")) {
+            holder.categoryTxt.setText("Facial");
+        }
+
+        else if (serviceList.get(position).getCategoryId().equals("104")) {
+            holder.categoryTxt.setText("Straightening");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("105")) {
+            holder.categoryTxt.setText("Pedicure");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("106")) {
+            holder.categoryTxt.setText("Bride/Groom");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("107")) {
+            holder.categoryTxt.setText("Manicure");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("108")) {
+            holder.categoryTxt.setText("Massage");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("109")) {
+            holder.categoryTxt.setText("Waxing");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("110")) {
             holder.categoryTxt.setText("Hair");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("111")) {
+            holder.categoryTxt.setText("Child mundan");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("112")) {
+            holder.categoryTxt.setText("Eye brow");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("113")) {
+            holder.categoryTxt.setText("Dandruff");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("114")) {
+            holder.categoryTxt.setText("Spa");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("115")) {
+            holder.categoryTxt.setText("Colour");
+        }
+        else if (serviceList.get(position).getCategoryId().equals("116")) {
+            holder.categoryTxt.setText("Other");
         }
         holder.amount.setText("\u20B9 "+serviceList.get(position).getPrice());
         holder.discountAmount.setText("\u20B9 "+serviceList.get(position).getDiscountedPrice() + " OFF");

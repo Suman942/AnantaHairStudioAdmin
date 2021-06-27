@@ -169,7 +169,7 @@
         android:layout_marginTop="15dp"
         android:textSize="16sp"
         android:textStyle="italic"
-        android:text="1/100"
+        android:text="0/100"
         android:textColor="@color/colorPrimary"
         android:id="@+id/count"/>
 

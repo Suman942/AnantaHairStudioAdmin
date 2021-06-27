@@ -69,4 +69,20 @@ public class GalleryRepo {
             }
         });
     }
+
+    public void deleteImg(String img,MutableLiveData<FetchGalleryResponse> mutableLiveData){
+        apiInterface.deletePhoto(img).enqueue(new Callback<FetchGalleryResponse>() {
+            @Override
+            public void onResponse(Call<FetchGalleryResponse> call, Response<FetchGalleryResponse> response) {
+                if (response.code() == 200){
+                    mutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FetchGalleryResponse> call, Throwable t) {
+                mutableLiveData.setValue(null);
+            }
+        });
+    }
 }

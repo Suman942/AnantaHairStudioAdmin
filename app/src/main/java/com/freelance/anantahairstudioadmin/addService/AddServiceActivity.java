@@ -132,6 +132,18 @@ public class AddServiceActivity extends AppCompatActivity {
         if (categoryId.equals("112")) {
             binding.category.setText("Eye brow");
         }
+        if (categoryId.equals("113")) {
+            binding.category.setText("Dandruff");
+        }
+        if (categoryId.equals("114")) {
+            binding.category.setText("Spa");
+        }
+        if (categoryId.equals("115")) {
+            binding.category.setText("Colour");
+        }
+        if (categoryId.equals("116")) {
+            binding.category.setText("Other");
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Category.categoryId);
         binding.category.setAdapter(adapter);
@@ -184,6 +196,18 @@ public class AddServiceActivity extends AppCompatActivity {
                 }
                 if (position == 12){
                     categoryId = "112";
+                }
+                if (position == 13){
+                    categoryId = "113";
+                }
+                if (position == 14){
+                    categoryId = "114";
+                }
+                if (position == 15){
+                    categoryId = "115";
+                }
+                if (position == 16){
+                    categoryId = "116";
                 }
             }
         });

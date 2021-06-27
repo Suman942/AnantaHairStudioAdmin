@@ -30,8 +30,8 @@ public class AdminUpdateInfoRepo {
         return adminUpdateInfoRepo;
     }
 
-    public void updateAdminInfo(String serviceId, String categoryId, String businessData, String phone, String watzapp, String email, MutableLiveData<UpdateServiceResponse> mutableLiveData){
-        apiInterface.updateAdminDetail(serviceId,categoryId,businessData,phone,watzapp,email).enqueue(new Callback<UpdateServiceResponse>() {
+    public void updateAdminInfo(String serviceId, String categoryId, String businessData, String phone, String watzapp, String email,String fb,String instagram,String youtube,String website, MutableLiveData<UpdateServiceResponse> mutableLiveData){
+        apiInterface.updateAdminDetail(serviceId,categoryId,businessData,phone,watzapp,email,fb,youtube,instagram,website).enqueue(new Callback<UpdateServiceResponse>() {
             @Override
             public void onResponse(Call<UpdateServiceResponse> call, Response<UpdateServiceResponse> response) {
                 if (response.code() == 200){

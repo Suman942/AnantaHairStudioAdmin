@@ -31,7 +31,6 @@ public class AllPicsActivity extends AppCompatActivity {
     GalleryViewModel galleryViewModel;
     GalleryAdapter adapter;
     ArrayList<FetchGalleryResponse.Data.Image> imageList = new ArrayList<>();
-     String url = "https://xbytelab.com/projects/ananta-salon/image/gallery/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +62,7 @@ public class AllPicsActivity extends AppCompatActivity {
             public void onChanged(FetchGalleryResponse fetchGalleryResponse) {
                 imageList.clear();
                 imageList.addAll(fetchGalleryResponse.getData().getImages());
-                Log.i("file","2: "+url);
-                adapter = new GalleryAdapter(getApplicationContext(),imageList,url);
+                adapter = new GalleryAdapter(getApplicationContext(),imageList);
                 binding.recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
                 binding.recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

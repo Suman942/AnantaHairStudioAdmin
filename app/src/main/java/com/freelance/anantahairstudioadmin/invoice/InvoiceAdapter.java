@@ -49,10 +49,6 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceV
             callback.totalPrice(price,discount,subtotal);
         }
         catch (Exception e){}
-
-
-
-
     }
 
     @Override

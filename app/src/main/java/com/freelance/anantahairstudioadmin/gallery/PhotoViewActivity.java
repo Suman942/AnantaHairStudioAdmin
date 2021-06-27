@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,13 +19,12 @@ import com.freelance.anantahairstudioadmin.utils.PrefManager;
 
 import java.util.ArrayList;
 
-public class PhotoViewActivity extends AppCompatActivity {
+public class PhotoViewActivity extends AppCompatActivity implements GalleryViewAdapter.Callback{
     ActivityPhotoViewBinding binding;
     ArrayList<FetchGalleryResponse.Data.Image> imageList = new ArrayList<>();
     GalleryViewModel galleryViewModel;
-    String url = null;
     GalleryViewAdapter adapter;
-    int position;
+    int current;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +36,8 @@ public class PhotoViewActivity extends AppCompatActivity {
     }
 
     private void getIntentData() {
-         position = getIntent().getIntExtra("position",0);
-        binding.viewPager.setCurrentItem(position);
+         current = getIntent().getIntExtra("position",0);
+        binding.viewPager.setCurrentItem(current);
     }
 
     private void observer() {
@@ -47,11 +47,9 @@ public class PhotoViewActivity extends AppCompatActivity {
             public void onChanged(FetchGalleryResponse fetchGalleryResponse) {
                 imageList.clear();
                 imageList.addAll(fetchGalleryResponse.getData().getImages());
-                url = fetchGalleryResponse.getData().getBaseUrl();
-                Log.i("file","2: "+url);
-                adapter = new GalleryViewAdapter(getApplicationContext(),imageList,url);
+                adapter = new GalleryViewAdapter(getApplicationContext(),imageList,PhotoViewActivity.this::deletePhoto);
                 binding.viewPager.setAdapter(adapter);
-                binding.viewPager.setCurrentItem(position);
+                binding.viewPager.setCurrentItem(current);
                 adapter.notifyDataSetChanged();
 
             }
@@ -64,6 +62,21 @@ public class PhotoViewActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        startActivity(new Intent(PhotoViewActivity.this,AllPicsActivity.class));
         finish();
+    }
+
+    @Override
+    public void deletePhoto(String img , int position) {
+        current = position;
+        galleryViewModel.deleteImg(img);
+        galleryViewModel.deleteImgLiveData().observe(this, new Observer<FetchGalleryResponse>() {
+            @Override
+            public void onChanged(FetchGalleryResponse fetchGalleryResponse) {
+                Toast.makeText(PhotoViewActivity.this, "Image deleted successfully", Toast.LENGTH_SHORT).show();
+                galleryViewModel.fetchGalleryImg(PrefManager.getInstance().getString(R.string.authToken));
+                current ++;
+            }
+        });
     }
 }

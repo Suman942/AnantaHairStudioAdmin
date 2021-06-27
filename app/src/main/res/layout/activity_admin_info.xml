@@ -11,14 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/loader"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -123,14 +116,100 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.card.MaterialCardView
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/emailLayout"
+            android:layout_marginTop="25dp"
             app:layout_constraintLeft_toLeftOf="@id/g1"
             app:layout_constraintRight_toRightOf="@id/g2"
+            app:boxBackgroundColor="@color/white"
+            android:textColorHint="@color/colorPrimary"
+            android:id="@+id/facebookLink"
+            android:hint="Facebook link">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:inputType="textEmailAddress"
+                android:id="@+id/facebook"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/facebookLink"
+            android:layout_marginTop="25dp"
+            app:layout_constraintLeft_toLeftOf="@id/g1"
+            app:layout_constraintRight_toRightOf="@id/g2"
+            app:boxBackgroundColor="@color/white"
+            android:textColorHint="@color/colorPrimary"
+            android:id="@+id/instagramLink"
+            android:hint="Instagram link">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:inputType="textEmailAddress"
+                android:id="@+id/Instagram"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/websiteLink"
+            android:layout_marginTop="25dp"
+            app:layout_constraintLeft_toLeftOf="@id/g1"
+            app:layout_constraintRight_toRightOf="@id/g2"
+            app:boxBackgroundColor="@color/white"
+            android:textColorHint="@color/colorPrimary"
+            android:id="@+id/youtubeLink"
+            android:hint="Youtube link">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:inputType="textEmailAddress"
+                android:id="@+id/youtube"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/instagramLink"
+            android:layout_marginTop="25dp"
+            app:layout_constraintLeft_toLeftOf="@id/g1"
+            app:layout_constraintRight_toRightOf="@id/g2"
+            app:boxBackgroundColor="@color/white"
+            android:textColorHint="@color/colorPrimary"
+            android:id="@+id/websiteLink"
+            android:hint="Website">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:inputType="textEmailAddress"
+                android:id="@+id/website"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:cardBackgroundColor="@color/colorPrimary"
-            android:layout_marginBottom="50dp"
             android:id="@+id/update">
 
             <TextView
@@ -142,7 +221,14 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
         </com.google.android.material.card.MaterialCardView>
-
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/loader"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

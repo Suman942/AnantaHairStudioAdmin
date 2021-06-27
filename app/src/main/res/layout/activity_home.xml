@@ -1,293 +1,314 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".home.HomeActivity"
-    android:fillViewport="true"
-    android:background="@color/white">
 
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true"
+        tools:context=".home.HomeActivity">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:id="@+id/l1"
-    app:layout_constraintHeight_percent="0.3"
-    android:background="@color/colorPrimary"
-    android:elevation="2dp"
-    app:layout_constraintTop_toTopOf="parent">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"
-        android:id="@+id/gCV"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"
-        android:id="@+id/gCH"/>
-
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="#0DD3F1"
-        android:elevation="2dp"
-        app:layout_constraintTop_toTopOf="@id/gCH"
-        app:layout_constraintBottom_toBottomOf="@id/gCH"
-        app:layout_constraintLeft_toLeftOf="@id/gCV"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/bookings"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:elevation="5dp"
-            app:layout_constraintBottom_toTopOf="@id/txtAllBooking"
-            android:backgroundTint="@color/white"
-            android:id="@+id/allBooking"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/allBooking"
-            android:textSize="16sp"
-            android:text="Pending"
-            android:id="@+id/txtAllBooking"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:textColor="@color/white"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="#0DD3F1"
-        android:elevation="2dp"
-        app:layout_constraintTop_toTopOf="@id/gCH"
-        app:layout_constraintBottom_toBottomOf="@id/gCH"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/gCV">
-
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/accepted_booking"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="10dp"
-            android:elevation="5dp"
-            android:backgroundTint="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/txtAccepted"
-            android:id="@+id/acceptedBooking"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/acceptedBooking"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Accepted "
-            android:id="@+id/txtAccepted"
-            android:textColor="@color/white"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05"
-        android:id="@+id/g1"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95"
-        android:id="@+id/g2"/>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="25dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="5dp"
-        android:id="@+id/history"
-        app:layout_constraintTop_toBottomOf="@id/l1"
-        app:layout_constraintLeft_toLeftOf="@id/g1"
-        app:layout_constraintRight_toRightOf="@id/g2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:background="@drawable/history"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/historyIcon"/>
 
-            <TextView
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/l1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/colorPrimary"
+                android:elevation="2dp"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginTop="15dp"
+                    android:text="Admin Dashboard"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gCV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gCH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.5" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="#0DD3F1"
+                    android:elevation="2dp"
+                    app:layout_constraintBottom_toBottomOf="@id/gCH"
+                    app:layout_constraintLeft_toLeftOf="@id/gCV"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/gCH">
+
+                    <ImageView
+                        android:id="@+id/allBooking"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bookings"
+                        android:backgroundTint="@color/white"
+                        android:elevation="5dp"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:layout_constraintBottom_toTopOf="@id/txtAllBooking"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtAllBooking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pending"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/allBooking" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="#0DD3F1"
+                    android:elevation="2dp"
+                    app:layout_constraintBottom_toBottomOf="@id/gCH"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/gCV"
+                    app:layout_constraintTop_toTopOf="@id/gCH">
+
+                    <ImageView
+                        android:id="@+id/acceptedBooking"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/accepted_booking"
+                        android:backgroundTint="@color/white"
+                        android:elevation="5dp"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:layout_constraintBottom_toTopOf="@+id/txtAccepted"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtAccepted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Accepted "
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/acceptedBooking" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/g1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/historyIcon"
-                app:layout_constraintBottom_toBottomOf="@id/historyIcon"
-                app:layout_constraintLeft_toRightOf="@id/historyIcon"
-                app:layout_constraintRight_toRightOf="parent"
-                android:textColor="@color/colorPrimary"
-                android:text="Booking History"
-                app:layout_constraintHorizontal_bias="0.1"
-                android:textSize="18sp"/>
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/g2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/history"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="5dp"
+                app:layout_constraintLeft_toLeftOf="@id/g1"
+                app:layout_constraintRight_toRightOf="@id/g2"
+                app:layout_constraintTop_toBottomOf="@id/l1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/historyIcon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/history"
+                        android:backgroundTint="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Booking History"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/historyIcon"
+                        app:layout_constraintHorizontal_bias="0.1"
+                        app:layout_constraintLeft_toRightOf="@id/historyIcon"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/historyIcon" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/editService"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="5dp"
+                app:layout_constraintLeft_toLeftOf="@id/g1"
+                app:layout_constraintRight_toRightOf="@id/g2"
+                app:layout_constraintTop_toBottomOf="@id/history">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/editServiceIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/ic_more"
+                        android:backgroundTint="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit Services"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/editServiceIcon"
+                        app:layout_constraintHorizontal_bias="0.1"
+                        app:layout_constraintLeft_toRightOf="@id/editServiceIcon"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/editServiceIcon" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/adminAccount"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="5dp"
+                app:layout_constraintLeft_toLeftOf="@id/g1"
+                app:layout_constraintRight_toRightOf="@id/g2"
+                app:layout_constraintTop_toBottomOf="@id/editService">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/userLogo"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/ic_user"
+                        android:backgroundTint="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Admin account"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/userLogo"
+                        app:layout_constraintHorizontal_bias="0.1"
+                        app:layout_constraintLeft_toRightOf="@id/userLogo"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/userLogo" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/gallery"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="5dp"
+                app:layout_constraintLeft_toLeftOf="@id/g1"
+                app:layout_constraintRight_toRightOf="@id/g2"
+                app:layout_constraintTop_toBottomOf="@id/adminAccount">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/galleryIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/ic_gallery"
+                        android:backgroundTint="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gallery"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/galleryIcon"
+                        app:layout_constraintHorizontal_bias="0.1"
+                        app:layout_constraintLeft_toRightOf="@id/galleryIcon"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/galleryIcon" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="25dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="5dp"
-        android:id="@+id/editService"
-        app:layout_constraintTop_toBottomOf="@id/history"
-        app:layout_constraintLeft_toLeftOf="@id/g1"
-        app:layout_constraintRight_toRightOf="@id/g2">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
-                android:background="@drawable/ic_more"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/editServiceIcon"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/editServiceIcon"
-                app:layout_constraintBottom_toBottomOf="@id/editServiceIcon"
-                app:layout_constraintLeft_toRightOf="@id/editServiceIcon"
-                app:layout_constraintRight_toRightOf="parent"
-                android:textColor="@color/colorPrimary"
-                android:text="Edit Services"
-                app:layout_constraintHorizontal_bias="0.1"
-                android:textSize="18sp"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="25dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="5dp"
-        android:id="@+id/adminAccount"
-        app:layout_constraintTop_toBottomOf="@id/editService"
-        app:layout_constraintLeft_toLeftOf="@id/g1"
-        app:layout_constraintRight_toRightOf="@id/g2">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:background="@drawable/ic_user"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/userLogo"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/userLogo"
-                app:layout_constraintBottom_toBottomOf="@id/userLogo"
-                app:layout_constraintLeft_toRightOf="@id/userLogo"
-                app:layout_constraintRight_toRightOf="parent"
-                android:textColor="@color/colorPrimary"
-                android:text="Admin account"
-                app:layout_constraintHorizontal_bias="0.1"
-                android:textSize="18sp"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="25dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="5dp"
-        android:id="@+id/gallery"
-        app:layout_constraintTop_toBottomOf="@id/adminAccount"
-        app:layout_constraintLeft_toLeftOf="@id/g1"
-        app:layout_constraintRight_toRightOf="@id/g2">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:background="@drawable/ic_gallery"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/galleryIcon"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/galleryIcon"
-                app:layout_constraintBottom_toBottomOf="@id/galleryIcon"
-                app:layout_constraintLeft_toRightOf="@id/galleryIcon"
-                app:layout_constraintRight_toRightOf="parent"
-                android:textColor="@color/colorPrimary"
-                android:text="Gallery"
-                app:layout_constraintHorizontal_bias="0.1"
-                android:textSize="18sp"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

@@ -24,17 +24,15 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     Context context;
     ArrayList<FetchGalleryResponse.Data.Image> imageList ;
-    String url ;
 
     public interface Callback{
         void setImageToImageView(String imageUrl);
     }
     Callback callback;
 
-    public GalleryAdapter(Context context, ArrayList<FetchGalleryResponse.Data.Image> imageList,String  url) {
+    public GalleryAdapter(Context context, ArrayList<FetchGalleryResponse.Data.Image> imageList) {
         this.context = context;
         this.imageList = imageList;
-        this.url = url;
     }
 
     @NonNull
@@ -46,19 +44,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
-         url = "https://xbytelab.com/projects/ananta-salon/image/gallery/";
 
-        GlideHelper.setImageView(context,holder.galleryImg,url+imageList.get(position).getImage(),R.drawable.ic_image_placeholder);
+        GlideHelper.setImageView(context,holder.galleryImg,imageList.get(position).getImage(),R.drawable.ic_image_placeholder);
         holder.galleryImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, PhotoViewActivity.class);
                 intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("position",position);
-                intent.putExtra("image",url+imageList.get(position).getImage());
+                intent.putExtra("image",imageList.get(position).getImage());
                 context.startActivity(intent);
             }
         });
+        Log.i("img",""+imageList.get(position).getImage());
     }
 
     @Override

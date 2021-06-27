@@ -10,8 +10,10 @@ public class AdminInfoViewModel extends ViewModel {
 
     MutableLiveData<ContactUpdateResponse> contactUpdateResponseMutableLiveData = new MutableLiveData<>();
 
-    public void updateAdminInfo(String serviceId,String categoryId,String businessData,String phone,String watzapp,String email){
-        AdminUpdateInfoRepo.getInstance().updateAdminInfo(serviceId,categoryId,businessData,phone,watzapp,email,updateAdminInfo);
+    public void updateAdminInfo(String serviceId,String categoryId,String businessData,String phone,String watzapp,String email,
+                                String fb,String instagram,String youtube,String website){
+        AdminUpdateInfoRepo.getInstance().updateAdminInfo(serviceId,categoryId,businessData,phone,watzapp,email,fb,instagram,youtube,
+                website,updateAdminInfo);
     }
 
     public MutableLiveData<UpdateServiceResponse> updateAdminInfoLiveData(){
