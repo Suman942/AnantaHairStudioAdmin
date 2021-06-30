@@ -38,6 +38,8 @@ public class AddServiceActivity extends AppCompatActivity {
     final int SELECT_IMAGE = 101;
     File file;
     ProgressDialog progressDialog;
+    int newService = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,7 @@ public class AddServiceActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 s = binding.description.getText().toString();
-                binding.count.setText(""+s.length()+"/100");
+                binding.count.setText("" + s.length() + "/100");
             }
 
             @Override
@@ -74,16 +76,31 @@ public class AddServiceActivity extends AppCompatActivity {
             @Override
             public void onChanged(UpdateServiceResponse updateServiceResponse) {
                 try {
-                    Toast.makeText(AddServiceActivity.this, ""+updateServiceResponse.getData().getMessage(), Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(AddServiceActivity.this,AllServicesActivity.class));
+                    Toast.makeText(AddServiceActivity.this, "" + updateServiceResponse.getData().getMessage(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AddServiceActivity.this, AllServicesActivity.class));
                     finish();
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     Toast.makeText(AddServiceActivity.this, "Please try later", Toast.LENGTH_SHORT).show();
                 }
                 binding.update.setEnabled(true);
                 progressDialog.dismiss();
 
+            }
+        });
+
+        servicesViewModel.createServiceLiveData().observe(this, new Observer<UpdateServiceResponse>() {
+            @Override
+            public void onChanged(UpdateServiceResponse updateServiceResponse) {
+                try {
+                    Toast.makeText(AddServiceActivity.this, ""+updateServiceResponse.getData().getMessage(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AddServiceActivity.this, AllServicesActivity.class));
+                    finish();
+                }
+                catch (Exception e){
+                    Toast.makeText(AddServiceActivity.this, "Technical error", Toast.LENGTH_SHORT).show();
+                }
+                progressDialog.dismiss();
+                binding.update.setEnabled(true);
             }
         });
     }
@@ -92,10 +109,14 @@ public class AddServiceActivity extends AppCompatActivity {
         binding.update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    if (file == null){
-                        file = new File(serviceImg);
-                    }
-                servicesViewModel.updateService(id,categoryId,binding.price.getText().toString(),binding.discountPrice.getText().toString(),binding.serviceName.getText().toString(),binding.description.getText().toString(),file );
+                if (file == null) {
+                    file = new File(serviceImg);
+                }
+                if (newService == 1) {
+                    servicesViewModel.createService(categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString(), file);
+                } else {
+                    servicesViewModel.updateService(id, categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString(), file);
+                }
                 binding.update.setEnabled(false);
                 progressDialog.show();
             }
@@ -112,72 +133,80 @@ public class AddServiceActivity extends AppCompatActivity {
     }
 
     private void getIntentData() {
-        serviceName = getIntent().getStringExtra("serviceName");
-        serviceImg = getIntent().getStringExtra("serviceImg");
-        price = getIntent().getStringExtra("price");
-        discountedPrice = getIntent().getStringExtra("discountedPrice");
-        id = getIntent().getStringExtra("id");
-        categoryId = getIntent().getStringExtra("categoryId");
-        info = getIntent().getStringExtra("info");
+        try {
+            newService = getIntent().getIntExtra("addNewService", 0);
+        } catch (Exception e) {
+        }
+        try {
+            serviceName = getIntent().getStringExtra("serviceName");
+            serviceImg = getIntent().getStringExtra("serviceImg");
+            price = getIntent().getStringExtra("price");
+            discountedPrice = getIntent().getStringExtra("discountedPrice");
+            id = getIntent().getStringExtra("id");
+            categoryId = getIntent().getStringExtra("categoryId");
+            info = getIntent().getStringExtra("info");
+            Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
 
-        binding.serviceName.setText(serviceName);
-        binding.price.setText(price);
-        binding.discountPrice.setText(discountedPrice);
-        binding.description.setText(info);
-        GlideHelper.setImageView(this,binding.img,serviceImg,R.drawable.ic_image_placeholder);
+            binding.serviceName.setText(serviceName);
+            binding.price.setText(price);
+            binding.discountPrice.setText(discountedPrice);
+            binding.description.setText(info);
+            GlideHelper.setImageView(this, binding.img, serviceImg, R.drawable.ic_image_placeholder);
 //        binding.category.setText(categoryId);
 
-        if (categoryId.equals("100")) {
-            binding.category.setText("Hair cut");
-        }
-        if (categoryId.equals("101")) {
-            binding.category.setText("Shaving");
-        }
-        if (categoryId.equals("102")) {
-            binding.category.setText("D-tan");
-        }
-        if (categoryId.equals("103")) {
-            binding.category.setText("Facial");
-        }
+            if (categoryId.equals("100")) {
+                binding.category.setText("Hair cut");
+            }
+            if (categoryId.equals("101")) {
+                binding.category.setText("Shaving");
+            }
+            if (categoryId.equals("102")) {
+                binding.category.setText("D-tan");
+            }
+            if (categoryId.equals("103")) {
+                binding.category.setText("Facial");
+            }
 
-        if (categoryId.equals("104")) {
-            binding.category.setText("Straightening");
-        }
-        if (categoryId.equals("105")) {
-            binding.category.setText("Pedicure");
-        }
-        if (categoryId.equals("106")) {
-            binding.category.setText("Bride/Groom");
-        }
-        if (categoryId.equals("107")) {
-            binding.category.setText("Manicure");
-        }
-        if (categoryId.equals("108")) {
-            binding.category.setText("Massage");
-        }
-        if (categoryId.equals("109")) {
-            binding.category.setText("Waxing");
-        }
-        if (categoryId.equals("110")) {
-            binding.category.setText("Hair");
-        }
-        if (categoryId.equals("111")) {
-            binding.category.setText("Child mundan");
-        }
-        if (categoryId.equals("112")) {
-            binding.category.setText("Eye brow");
-        }
-        if (categoryId.equals("113")) {
-            binding.category.setText("Dandruff");
-        }
-        if (categoryId.equals("114")) {
-            binding.category.setText("Spa");
-        }
-        if (categoryId.equals("115")) {
-            binding.category.setText("Colour");
-        }
-        if (categoryId.equals("116")) {
-            binding.category.setText("Other");
+            if (categoryId.equals("104")) {
+                binding.category.setText("Straightening");
+            }
+            if (categoryId.equals("105")) {
+                binding.category.setText("Pedicure");
+            }
+            if (categoryId.equals("106")) {
+                binding.category.setText("Bride/Groom");
+            }
+            if (categoryId.equals("107")) {
+                binding.category.setText("Manicure");
+            }
+            if (categoryId.equals("108")) {
+                binding.category.setText("Massage");
+            }
+            if (categoryId.equals("109")) {
+                binding.category.setText("Waxing");
+            }
+            if (categoryId.equals("110")) {
+                binding.category.setText("Hair");
+            }
+            if (categoryId.equals("111")) {
+                binding.category.setText("Child mundan");
+            }
+            if (categoryId.equals("112")) {
+                binding.category.setText("Eye brow");
+            }
+            if (categoryId.equals("113")) {
+                binding.category.setText("Dandruff");
+            }
+            if (categoryId.equals("114")) {
+                binding.category.setText("Spa");
+            }
+            if (categoryId.equals("115")) {
+                binding.category.setText("Colour");
+            }
+            if (categoryId.equals("116")) {
+                binding.category.setText("Other");
+            }
+        } catch (Exception e) {
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Category.categoryId);
@@ -193,55 +222,55 @@ public class AddServiceActivity extends AppCompatActivity {
         binding.category.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0){
+                if (position == 0) {
                     categoryId = "100";
                 }
-                if (position == 1){
+                if (position == 1) {
                     categoryId = "101";
                 }
-                if (position == 2){
+                if (position == 2) {
                     categoryId = "102";
                 }
-                if (position == 3){
+                if (position == 3) {
                     categoryId = "103";
                 }
-                if (position == 4){
+                if (position == 4) {
                     categoryId = "104";
                 }
-                if (position == 5){
+                if (position == 5) {
                     categoryId = "105";
                 }
-                if (position == 6){
+                if (position == 6) {
                     categoryId = "106";
                 }
-                if (position == 7){
+                if (position == 7) {
                     categoryId = "107";
                 }
-                if (position == 8){
+                if (position == 8) {
                     categoryId = "108";
                 }
-                if (position == 9){
+                if (position == 9) {
                     categoryId = "109";
                 }
-                if (position == 10){
+                if (position == 10) {
                     categoryId = "110";
                 }
-                if (position == 11){
+                if (position == 11) {
                     categoryId = "111";
                 }
-                if (position == 12){
+                if (position == 12) {
                     categoryId = "112";
                 }
-                if (position == 13){
+                if (position == 13) {
                     categoryId = "113";
                 }
-                if (position == 14){
+                if (position == 14) {
                     categoryId = "114";
                 }
-                if (position == 15){
+                if (position == 15) {
                     categoryId = "115";
                 }
-                if (position == 16){
+                if (position == 16) {
                     categoryId = "116";
                 }
             }
@@ -264,9 +293,9 @@ public class AddServiceActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
-                GlideHelper.setImageViewWithURI(getApplicationContext(),binding.img,resultUri);
-                 file = new File(resultUri.getPath());
-                Log.i("file",""+file);
+                GlideHelper.setImageViewWithURI(getApplicationContext(), binding.img, resultUri);
+                file = new File(resultUri.getPath());
+                Log.i("file", "" + file);
 
             }
         }

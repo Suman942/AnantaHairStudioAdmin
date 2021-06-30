@@ -136,6 +136,20 @@ public interface ApiInterface {
     );
 
     @Headers({
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @Multipart
+    @POST("admin/service")
+    Call<UpdateServiceResponse> createService(
+            @Part("category_id") RequestBody category_id,
+            @Part("price") RequestBody price,
+            @Part("discounted_price") RequestBody discounted_price,
+            @Part("name") RequestBody name,
+            @Part("info") RequestBody info,
+            @Part MultipartBody.Part file
+    );
+
+    @Headers({
             "Content-Type: application/x-www-form-urlencoded",
             "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
     })

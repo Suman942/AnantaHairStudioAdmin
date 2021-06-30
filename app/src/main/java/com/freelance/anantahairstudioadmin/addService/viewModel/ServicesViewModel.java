@@ -15,6 +15,7 @@ public class ServicesViewModel extends ViewModel {
     MutableLiveData<ServicesResponse> servicesResponseMutableLiveData = new MutableLiveData<>();
     MutableLiveData<UpdateServiceResponse> updateServiceResponseMutableLiveData = new MutableLiveData<>();
     MutableLiveData<UpdateServiceResponse> deleteServiceResponseMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<UpdateServiceResponse> createServiceResponseMutableLiveData = new MutableLiveData<>();
 
     public void getAllServices(String token){
         ServicesRepo.getInstance().allServices(token,servicesResponseMutableLiveData);
@@ -37,6 +38,13 @@ public class ServicesViewModel extends ViewModel {
 
     public MutableLiveData<UpdateServiceResponse> deleteServiceLiveData(){
         return deleteServiceResponseMutableLiveData;
+    }
+    public void createService( String categoryId, String price, String discountPrice, String name, String description, File file){
+        ServicesRepo.getInstance().createService(categoryId,price,discountPrice,name,description,file,createServiceResponseMutableLiveData);
+    }
+
+    public MutableLiveData<UpdateServiceResponse> createServiceLiveData(){
+        return  createServiceResponseMutableLiveData;
     }
 }
 

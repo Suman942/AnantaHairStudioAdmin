@@ -89,7 +89,9 @@ public class AllServicesActivity extends AppCompatActivity implements ServiceAda
         binding.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AllServicesActivity.this, AddServiceActivity.class));
+                Intent intent = new Intent(AllServicesActivity.this,AddServiceActivity.class);
+                intent.putExtra("addNewService",1);
+                startActivity(intent);
                 finish();
             }
         });

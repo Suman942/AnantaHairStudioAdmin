@@ -39,7 +39,6 @@
             app:layout_constraintRight_toRightOf="parent"
             android:background="@drawable/ic_add"
             android:layout_marginRight="20dp"
-            android:visibility="gone"
             android:id="@+id/add"
             />
 

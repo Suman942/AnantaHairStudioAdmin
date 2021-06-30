@@ -113,4 +113,35 @@ public class ServicesRepo {
             }
         });
     }
+
+
+    public void createService(String categoryId, String price, String discountPrice, String name, String description, File file, MutableLiveData<UpdateServiceResponse> mutableLiveData){
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("text/plain"),file);
+        MultipartBody.Part bodyFile = MultipartBody.Part.createFormData("img", file.getName(), requestFile);
+        RequestBody requestCategoryId = RequestBody.create(MediaType.parse("text/plain"),categoryId);
+        RequestBody requestPrice = RequestBody.create(MediaType.parse("text/plain"),price);
+        RequestBody requestDiscount = RequestBody.create(MediaType.parse("text/plain"),discountPrice);
+        RequestBody requestname = RequestBody.create(MediaType.parse("text/plain"),name);
+        RequestBody requestDesc = RequestBody.create(MediaType.parse("text/plain"),description);
+
+        apiInterface.createService(requestCategoryId,requestPrice,requestDiscount,requestname,requestDesc,bodyFile).enqueue(new Callback<UpdateServiceResponse>() {
+            @Override
+            public void onResponse(Call<UpdateServiceResponse> call, Response<UpdateServiceResponse> response) {
+                if (response.code() == 200){
+                    Log.i("CreateService","success");
+                    mutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdateServiceResponse> call, Throwable t) {
+                Log.i("CreateService","failure: "+t.getMessage());
+
+                mutableLiveData.setValue(null);
+
+            }
+        });
+    }
+
 }
