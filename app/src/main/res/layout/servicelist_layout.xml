@@ -32,12 +32,23 @@
             app:layout_constraintLeft_toRightOf="@id/serviceImg"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="10dp"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/delete"
             android:text="Service name"
             android:textColor="#52508B"
             android:textSize="18sp"
             android:layout_marginLeft="16dp"
             android:id="@+id/serviceNameTxt"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/delete"
+            android:layout_margin="5dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/delete"/>
+
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"

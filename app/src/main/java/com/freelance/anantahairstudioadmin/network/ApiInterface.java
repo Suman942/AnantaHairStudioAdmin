@@ -13,6 +13,7 @@ import com.freelance.anantahairstudioadmin.signup.Authentication;
 import com.google.gson.JsonObject;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -23,6 +24,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -105,21 +107,33 @@ public interface ApiInterface {
             @Field("email") String email
     );
 
+
+
     @Headers({
-            "Content-Type: application/x-www-form-urlencoded",
             "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
     })
-    @FormUrlEncoded
-    @POST("admin/update")
-    Call<UpdateServiceResponse> updateService(
-            @Field("service_id") String service_id,
-            @Field("category_id") String category_id,
-            @Field("price") String price,
-            @Field("discounted_price") String discounted_price,
-            @Field("name") String name,
-            @Field("info") String info
-    );
+    @Multipart
+    @POST("admin/service")
+    Call<UpdateServiceResponse> deleteService(
+            @Part("delete") RequestBody service_id
+            );
 
+
+    @Headers({
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @Multipart
+    @POST("admin/service")
+    Call<UpdateServiceResponse> updateService(
+            @Part("service_id") RequestBody service_id,
+            @Part("category_id") RequestBody category_id,
+            @Part("price") RequestBody price,
+            @Part("discounted_price") RequestBody discounted_price,
+            @Part("name") RequestBody name,
+            @Part("info") RequestBody info,
+            @Part MultipartBody.Part file
+
+    );
 
     @Headers({
             "Content-Type: application/x-www-form-urlencoded",

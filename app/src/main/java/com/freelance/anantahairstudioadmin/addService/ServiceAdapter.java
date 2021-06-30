@@ -2,6 +2,7 @@ package com.freelance.anantahairstudioadmin.addService;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,14 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
 
     Context context;
     ArrayList<ServicesResponse.Data.Service> serviceList;
-
-    public ServiceAdapter(Context context,ArrayList<ServicesResponse.Data.Service> serviceList) {
+    public interface Callback{
+        void delete(String id);
+    }
+    Callback callback;
+    public ServiceAdapter(Context context,ArrayList<ServicesResponse.Data.Service> serviceList,Callback callback) {
         this.context = context;
         this.serviceList = serviceList;
+        this.callback = callback;
     }
 
     @NonNull
@@ -38,7 +43,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
 
-        GlideHelper.setImageView(context,holder.serviceImg,"",R.drawable.ic_image_placeholder);
+        GlideHelper.setImageView(context,holder.serviceImg,serviceList.get(position).getImg(),R.drawable.ic_image_placeholder);
         if (serviceList.get(position).getCategoryId().equals("100")) {
             holder.categoryTxt.setText("Hair cut");
         }
@@ -112,6 +117,15 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
             }
         });
 
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.delete(serviceList.get(position).getId());
+            }
+        });
+        Log.i("img",""+serviceList.get(0).getImg());
+
     }
 
     @Override
@@ -120,7 +134,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     }
 
     public class ServiceViewHolder extends RecyclerView.ViewHolder {
-        ImageView serviceImg;
+        ImageView serviceImg,delete;
         TextView serviceName, categoryTxt,amount,originalAmount, discountAmount;
         MaterialCardView serviceLayout;
         public ServiceViewHolder(@NonNull View itemView) {
@@ -131,6 +145,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
             serviceLayout = itemView.findViewById(R.id.serviceLayout);
             amount = itemView.findViewById(R.id.amountTxt);
             discountAmount = itemView.findViewById(R.id.discountAmount);
+            delete = itemView.findViewById(R.id.delete);
+
         }
     }
 

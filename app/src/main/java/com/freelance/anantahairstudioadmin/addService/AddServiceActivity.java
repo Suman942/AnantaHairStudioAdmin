@@ -1,14 +1,18 @@
 package com.freelance.anantahairstudioadmin.addService;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,19 +23,29 @@ import com.freelance.anantahairstudioadmin.R;
 import com.freelance.anantahairstudioadmin.addService.pojo.UpdateServiceResponse;
 import com.freelance.anantahairstudioadmin.addService.viewModel.ServicesViewModel;
 import com.freelance.anantahairstudioadmin.databinding.ActivityAddServiceBinding;
+import com.freelance.anantahairstudioadmin.gallery.AllPicsActivity;
 import com.freelance.anantahairstudioadmin.home.HomeActivity;
+import com.freelance.anantahairstudioadmin.utils.GlideHelper;
+import com.theartofdev.edmodo.cropper.CropImage;
+
+import java.io.File;
 
 public class AddServiceActivity extends AppCompatActivity {
 
     ActivityAddServiceBinding binding;
     String serviceName, serviceImg, price, discountedPrice, id, categoryId, info;
     ServicesViewModel servicesViewModel;
-
+    final int SELECT_IMAGE = 101;
+    File file;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_service);
         servicesViewModel = new ViewModelProvider(this).get(ServicesViewModel.class);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Updating service....");
+        progressDialog.setCanceledOnTouchOutside(false);
         getIntentData();
         clickView();
         observer();
@@ -59,10 +73,17 @@ public class AddServiceActivity extends AppCompatActivity {
         servicesViewModel.updateServiceLiveData().observe(this, new Observer<UpdateServiceResponse>() {
             @Override
             public void onChanged(UpdateServiceResponse updateServiceResponse) {
-                Toast.makeText(AddServiceActivity.this, "Successfully updated", Toast.LENGTH_SHORT).show();
+                try {
+                    Toast.makeText(AddServiceActivity.this, ""+updateServiceResponse.getData().getMessage(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AddServiceActivity.this,AllServicesActivity.class));
+                    finish();
+                }
+                catch (Exception e){
+                    Toast.makeText(AddServiceActivity.this, "Please try later", Toast.LENGTH_SHORT).show();
+                }
                 binding.update.setEnabled(true);
-                startActivity(new Intent(AddServiceActivity.this,AllServicesActivity.class));
-                finish();
+                progressDialog.dismiss();
+
             }
         });
     }
@@ -71,8 +92,21 @@ public class AddServiceActivity extends AppCompatActivity {
         binding.update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                servicesViewModel.updateService(id,categoryId,binding.price.getText().toString(),binding.discountPrice.getText().toString(),binding.serviceName.getText().toString(),binding.description.getText().toString());
+                    if (file == null){
+                        file = new File(serviceImg);
+                    }
+                servicesViewModel.updateService(id,categoryId,binding.price.getText().toString(),binding.discountPrice.getText().toString(),binding.serviceName.getText().toString(),binding.description.getText().toString(),file );
                 binding.update.setEnabled(false);
+                progressDialog.show();
+            }
+        });
+
+        binding.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
             }
         });
     }
@@ -90,6 +124,7 @@ public class AddServiceActivity extends AppCompatActivity {
         binding.price.setText(price);
         binding.discountPrice.setText(discountedPrice);
         binding.description.setText(info);
+        GlideHelper.setImageView(this,binding.img,serviceImg,R.drawable.ic_image_placeholder);
 //        binding.category.setText(categoryId);
 
         if (categoryId.equals("100")) {
@@ -214,6 +249,29 @@ public class AddServiceActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SELECT_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                Uri selectedImage = data.getData();
+                CropImage.activity(selectedImage).start(AddServiceActivity.this);
+            }
+        }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                GlideHelper.setImageViewWithURI(getApplicationContext(),binding.img,resultUri);
+                 file = new File(resultUri.getPath());
+                Log.i("file",""+file);
+
+            }
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
