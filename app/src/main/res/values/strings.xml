@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ananta Admin</string>
+    <string name="app_name">Admin</string>
     <string name="authToken">authToken</string>
 
 </resources>

@@ -100,7 +100,7 @@ public class AllServicesActivity extends AppCompatActivity implements ServiceAda
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        startActivity(new Intent(AllServicesActivity.this, HomeActivity.class));
+        startActivity(new Intent(AllServicesActivity.this, HomeActivity.class));
         finish();
     }
 
