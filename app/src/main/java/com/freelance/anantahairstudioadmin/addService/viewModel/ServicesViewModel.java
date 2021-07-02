@@ -28,6 +28,9 @@ public class ServicesViewModel extends ViewModel {
         ServicesRepo.getInstance().updateService(serviceId,categoryId,price,discountPrice,name,description,file,updateServiceResponseMutableLiveData);
     }
 
+    public void updateServiceWithoutImg(String serviceId, String categoryId, String price, String discountPrice, String name, String description){
+        ServicesRepo.getInstance().updateService(serviceId,categoryId,price,discountPrice,name,description,updateServiceResponseMutableLiveData);
+    }
     public MutableLiveData<UpdateServiceResponse> updateServiceLiveData(){
         return  updateServiceResponseMutableLiveData;
     }

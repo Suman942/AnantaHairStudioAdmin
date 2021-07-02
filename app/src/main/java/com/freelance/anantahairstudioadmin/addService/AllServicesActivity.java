@@ -56,6 +56,7 @@ public class AllServicesActivity extends AppCompatActivity implements ServiceAda
             @Override
             public void onChanged(ServicesResponse servicesResponse) {
                 if (servicesResponse != null){
+                    serviceList.clear();
                     serviceList.addAll(servicesResponse.getData().getServices());
                     serviceAdapter.notifyDataSetChanged();
                     binding.loader.setVisibility(View.GONE);

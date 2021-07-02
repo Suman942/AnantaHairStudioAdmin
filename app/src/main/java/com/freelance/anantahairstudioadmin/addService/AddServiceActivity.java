@@ -109,16 +109,31 @@ public class AddServiceActivity extends AppCompatActivity {
         binding.update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (file == null) {
-                    file = new File(serviceImg);
-                }
                 if (newService == 1) {
-                    servicesViewModel.createService(categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString(), file);
-                } else {
-                    servicesViewModel.updateService(id, categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString(), file);
+                    if (file != null && categoryId != null && !binding.price.getText().toString().isEmpty() &&
+                            !binding.discountPrice.getText().toString().isEmpty() &&    !binding.serviceName.getText().toString().isEmpty()) {
+                        servicesViewModel.createService(categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString(), file);
+                        binding.update.setEnabled(false);
+                        progressDialog.show();
+                    }
+                    else {
+                        Toast.makeText(AddServiceActivity.this, "Field empty", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                binding.update.setEnabled(false);
-                progressDialog.show();
+                else {
+                    if (file == null) {
+                        servicesViewModel.updateServiceWithoutImg(id, categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString());
+                        binding.update.setEnabled(false);
+                        progressDialog.show();
+                    }
+                    else {
+                        servicesViewModel.updateService(id, categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString(), file);
+                        binding.update.setEnabled(false);
+                        progressDialog.show();
+                    }
+                }
+
+
             }
         });
 
@@ -145,7 +160,6 @@ public class AddServiceActivity extends AppCompatActivity {
             id = getIntent().getStringExtra("id");
             categoryId = getIntent().getStringExtra("categoryId");
             info = getIntent().getStringExtra("info");
-            Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
 
             binding.serviceName.setText(serviceName);
             binding.price.setText(price);

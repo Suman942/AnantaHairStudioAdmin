@@ -140,6 +140,22 @@ public interface ApiInterface {
     })
     @Multipart
     @POST("admin/service")
+    Call<UpdateServiceResponse> updateService(
+            @Part("service_id") RequestBody service_id,
+            @Part("category_id") RequestBody category_id,
+            @Part("price") RequestBody price,
+            @Part("discounted_price") RequestBody discounted_price,
+            @Part("name") RequestBody name,
+            @Part("info") RequestBody info
+//            @Part MultipartBody.Part file
+
+    );
+
+    @Headers({
+            "secret: SECn83ninsoPi40ZjfHjeQwUdfomns9d",
+    })
+    @Multipart
+    @POST("admin/service")
     Call<UpdateServiceResponse> createService(
             @Part("category_id") RequestBody category_id,
             @Part("price") RequestBody price,

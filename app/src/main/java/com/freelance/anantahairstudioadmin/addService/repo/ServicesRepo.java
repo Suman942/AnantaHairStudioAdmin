@@ -95,6 +95,40 @@ public class ServicesRepo {
           }
       });
     }
+
+
+
+    public void updateService(String serviceId, String categoryId, String price, String discountPrice, String name, String description, MutableLiveData<UpdateServiceResponse> mutableLiveData){
+
+//        RequestBody requestFile = RequestBody.create(MediaType.parse("text/plain"),file);
+//        MultipartBody.Part bodyFile = MultipartBody.Part.createFormData("img", file.getName(), requestFile);
+        RequestBody requestServiceId = RequestBody.create(MediaType.parse("text/plain"),serviceId);
+        RequestBody requestCategoryId = RequestBody.create(MediaType.parse("text/plain"),categoryId);
+        RequestBody requestPrice = RequestBody.create(MediaType.parse("text/plain"),price);
+        RequestBody requestDiscount = RequestBody.create(MediaType.parse("text/plain"),discountPrice);
+        RequestBody requestname = RequestBody.create(MediaType.parse("text/plain"),name);
+        RequestBody requestDesc = RequestBody.create(MediaType.parse("text/plain"),description);
+
+        apiInterface.updateService(requestServiceId,requestCategoryId,requestPrice,requestDiscount,requestname,requestDesc).enqueue(new Callback<UpdateServiceResponse>() {
+            @Override
+            public void onResponse(Call<UpdateServiceResponse> call, Response<UpdateServiceResponse> response) {
+                if (response.code() == 200){
+                    Log.i("UpdateService","success");
+                    mutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdateServiceResponse> call, Throwable t) {
+                Log.i("UpdateService","failure: "+t.getMessage());
+
+                mutableLiveData.setValue(null);
+
+            }
+        });
+    }
+
+
     public void deleteService(String serviceId,MutableLiveData<UpdateServiceResponse> mutableLiveData){
         RequestBody requestServiceId = RequestBody.create(MediaType.parse("text/plain"),serviceId);
         apiInterface.deleteService(requestServiceId).enqueue(new Callback<UpdateServiceResponse>() {
