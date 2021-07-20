@@ -45,7 +45,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     android:id="@+id/loader"/>
-    <com.freelance.anantahairstudioadmin.utils.EmptyRecyclerView
+    <com.freelance.anantaadmin.utils.EmptyRecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"

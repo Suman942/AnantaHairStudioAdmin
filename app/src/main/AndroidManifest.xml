@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.freelance.anantahairstudioadmin">
+    package="com.freelance.anantaadmin">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -18,20 +18,20 @@
         android:largeHeap="true"
         android:theme="@style/Theme.AnantaHairStudioAdmin"
         android:usesCleartextTraffic="true">
-        <activity android:name=".acceptedBooking.BookingHistoryActivity"></activity>
-        <activity android:name=".gallery.PhotoViewActivity" />
-        <activity android:name=".gallery.AllPicsActivity" />
-        <activity android:name=".adminInfo.AdminInfoActivity" />
-        <activity android:name=".addService.AllServicesActivity" />
-        <activity android:name=".invoice.InvoiceActivity" />
-        <activity android:name=".acceptedBooking.AcceptedBookingDetailsActivity" />
-        <activity android:name=".allBooking.BookingDetailsActivity" />
-        <activity android:name=".addService.AddServiceActivity" />
-        <activity android:name=".acceptedBooking.AcceptedBookingActivity" />
-        <activity android:name=".signup.SignUpActivity" />
-        <activity android:name=".allBooking.AllBookingsActivity" />
-        <activity android:name=".home.HomeActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name="com.freelance.anantaadmin.acceptedBooking.BookingHistoryActivity"></activity>
+        <activity android:name="com.freelance.anantaadmin.gallery.PhotoViewActivity" />
+        <activity android:name="com.freelance.anantaadmin.gallery.AllPicsActivity" />
+        <activity android:name="com.freelance.anantaadmin.adminInfo.AdminInfoActivity" />
+        <activity android:name="com.freelance.anantaadmin.addService.AllServicesActivity" />
+        <activity android:name="com.freelance.anantaadmin.invoice.InvoiceActivity" />
+        <activity android:name="com.freelance.anantaadmin.acceptedBooking.AcceptedBookingDetailsActivity" />
+        <activity android:name="com.freelance.anantaadmin.allBooking.BookingDetailsActivity" />
+        <activity android:name="com.freelance.anantaadmin.addService.AddServiceActivity" />
+        <activity android:name="com.freelance.anantaadmin.acceptedBooking.AcceptedBookingActivity" />
+        <activity android:name="com.freelance.anantaadmin.signup.SignUpActivity" />
+        <activity android:name="com.freelance.anantaadmin.allBooking.AllBookingsActivity" />
+        <activity android:name="com.freelance.anantaadmin.home.HomeActivity" />
+        <activity android:name="com.freelance.anantaadmin.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +47,7 @@
             android:resource="@color/colorPrimary" />
 
         <service
-            android:name=".notification.FCMService"
+            android:name="com.freelance.anantaadmin.notification.FCMService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -60,7 +60,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.freelance.anantahairstudioadmin.provider"
+            android:authorities="com.freelance.anantaadmin.provider"
             android:exported="false"
             android:grantUriPermissions="true"
             tools:replace="android:authorities">

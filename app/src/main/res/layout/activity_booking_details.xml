@@ -116,7 +116,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <com.freelance.anantahairstudioadmin.utils.EmptyRecyclerView
+        <com.freelance.anantaadmin.utils.EmptyRecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"

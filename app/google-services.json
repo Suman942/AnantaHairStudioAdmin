@@ -7,20 +7,41 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:642375539807:android:293a41845cd1933a508fea",
+        "mobilesdk_app_id": "1:642375539807:android:39b70dbe4879ee6d508fea",
         "android_client_info": {
-          "package_name": "com.freelance.anantahairstudio"
+          "package_name": "com.freelance.anantaadmin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "642375539807-57pvf23u9nqo1pgtl7ejtk509l2qbv44.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.freelance.anantahairstudio",
-            "certificate_hash": "5f0a90a5817fb14b6545e1b1c5cab9653e6377e0"
-          }
-        },
+          "client_id": "642375539807-su04mh478147p3tvm5oua1jt5gas6oc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5pjYVSRmVMdonDHMqKMsfV9PqUIM6iUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642375539807-su04mh478147p3tvm5oua1jt5gas6oc4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642375539807:android:c844da6a9c66d56c508fea",
+        "android_client_info": {
+          "package_name": "com.freelance.anantahairadmin"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "642375539807-su04mh478147p3tvm5oua1jt5gas6oc4.apps.googleusercontent.com",
           "client_type": 3
@@ -50,6 +71,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "642375539807-mipq7hjvs64ld107t4rml0ur7ljuer9h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freelance.anantahairstudioadmin",
+            "certificate_hash": "5f0a90a5817fb14b6545e1b1c5cab9653e6377e0"
+          }
+        },
         {
           "client_id": "642375539807-su04mh478147p3tvm5oua1jt5gas6oc4.apps.googleusercontent.com",
           "client_type": 3
