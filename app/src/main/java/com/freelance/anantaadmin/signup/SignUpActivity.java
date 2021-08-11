@@ -54,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity {
         emailList.add("senarjun91@gmail.com");
         emailList.add("arjunananta32@gmail.com");
         emailList.add("anantahair9@gmail.com");
-
+        emailList.add("suman.19da@gmail.com");
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Please wait..");

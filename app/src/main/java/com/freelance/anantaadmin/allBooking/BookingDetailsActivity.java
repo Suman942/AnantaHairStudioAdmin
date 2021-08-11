@@ -106,7 +106,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
             public void onChanged(AcceptBookingResponse acceptBookingResponse) {
                 if (acceptBookingResponse.getData() != null) {
                     Toast.makeText(BookingDetailsActivity.this, "Booking accepted successfully", Toast.LENGTH_SHORT).show();
-                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/" + topic, "Booking Accepted", "BookingId: " + bookingId, R.drawable.main_logo));
+                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/" + topic, "Booking Accepted", "BookingId: #" + bookingId, R.drawable.main_logo));
                     startActivity(new Intent(BookingDetailsActivity.this, AllBookingsActivity.class));
                     finish();
                 }
@@ -118,6 +118,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
             public void onChanged(AcceptBookingResponse acceptBookingResponse) {
                 if (acceptBookingResponse.getData() != null) {
                     Toast.makeText(BookingDetailsActivity.this, "Booking rejected successfully", Toast.LENGTH_SHORT).show();
+                    notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/" + topic, "Booking Rejected", "BookingId: #" + bookingId +", sorry no slot available", R.drawable.main_logo));
+
                     startActivity(new Intent(BookingDetailsActivity.this, AllBookingsActivity.class));
                     finish();
                 }

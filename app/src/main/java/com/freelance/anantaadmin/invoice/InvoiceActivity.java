@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.freelance.anantaadmin.R;
 import com.freelance.anantaadmin.allBooking.response.BookingDetailsResponse;
@@ -69,7 +70,7 @@ public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter
             file.setReadable(true, false);
             Uri imageUri = FileProvider.getUriForFile(
                     InvoiceActivity.this,
-                    "com.freelance.anantahairstudioadmin.provider", //(use your app signature + ".provider" )
+                    "com.freelance.anantaadmin.provider", //(use your app signature + ".provider" )
                     file);
             final Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -78,7 +79,7 @@ public class InvoiceActivity extends AppCompatActivity implements InvoiceAdapter
             startActivity(Intent.createChooser(intent, "Share ia"));
         } catch (Exception e) {
             Log.e("shareError", " " + e.getMessage());
-//            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

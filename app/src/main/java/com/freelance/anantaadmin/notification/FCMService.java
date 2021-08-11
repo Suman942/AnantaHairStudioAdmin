@@ -33,29 +33,19 @@ public class FCMService extends FirebaseMessagingService {
 
     @Override
     public void handleIntent(Intent intent) {
-//        Log.i( "FCM", "handleIntent ");
-//        Bundle bundle = intent.getExtras();
-//        HashMap<String, Object> map = new HashMap<String, Object>();
-//        if (bundle != null) {
-//            for (String key : bundle.keySet()) {
-//                Object value =  bundle.get(key);
-////                map.put("key",value);
-//                Log.i("FCM", "Key: " + map.get("gcm.notification.body"));
-//            }
-//        }
-        showNotifications();
+        showNotifications(intent.getExtras().getString("gcm.notification.title"),intent.getExtras().getString("gcm.notification.body"));
     }
 
 
-    public  void showNotifications(){
+    public  void showNotifications(String title,String body){
         Intent intent = new Intent(this, AllBookingsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"AnantaHairStudioNotification")
                 .setSmallIcon(R.drawable.main_logo)
-                .setContentTitle("Hey! Admin")
-                .setContentText("Booking request from user")
+                .setContentTitle(title)
+                .setContentText(body)
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
                 .setVibrate(new long[]{0L})
                 .setContentIntent(pendingIntent)

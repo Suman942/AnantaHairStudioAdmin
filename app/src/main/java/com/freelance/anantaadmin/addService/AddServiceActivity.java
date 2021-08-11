@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,8 @@ import com.freelance.anantaadmin.R;
 import com.freelance.anantaadmin.addService.pojo.UpdateServiceResponse;
 import com.freelance.anantaadmin.addService.viewModel.ServicesViewModel;
 import com.freelance.anantaadmin.databinding.ActivityAddServiceBinding;
+import com.freelance.anantaadmin.network.RequestFormatter;
+import com.freelance.anantaadmin.notification.NotificationViewModel;
 import com.freelance.anantaadmin.utils.GlideHelper;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -37,12 +40,17 @@ public class AddServiceActivity extends AppCompatActivity {
     File file;
     ProgressDialog progressDialog;
     int newService = 0;
+    String desc;
+    NotificationViewModel notificationViewModel;
+    String topic = "service";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_service);
         servicesViewModel = new ViewModelProvider(this).get(ServicesViewModel.class);
+        notificationViewModel = new ViewModelProvider(this).get(NotificationViewModel.class);
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Updating service....");
         progressDialog.setCanceledOnTouchOutside(false);
@@ -91,6 +99,9 @@ public class AddServiceActivity extends AppCompatActivity {
             public void onChanged(UpdateServiceResponse updateServiceResponse) {
                 try {
                     Toast.makeText(AddServiceActivity.this, ""+updateServiceResponse.getData().getMessage(), Toast.LENGTH_SHORT).show();
+                    if (categoryId.equals("116")){
+                        notificationViewModel.sendNotification(RequestFormatter.sendNotification("/topics/" + topic, "Today's Special", ""+binding.serviceName.getText().toString(), R.drawable.main_logo));
+                    }
                     startActivity(new Intent(AddServiceActivity.this, AllServicesActivity.class));
                     finish();
                 }
@@ -120,12 +131,12 @@ public class AddServiceActivity extends AppCompatActivity {
                 }
                 else {
                     if (file == null) {
-                        servicesViewModel.updateServiceWithoutImg(id, categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString());
+                        servicesViewModel.updateServiceWithoutImg(id, categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString().replaceAll("\\\\n", "\n"));
                         binding.update.setEnabled(false);
                         progressDialog.show();
                     }
                     else {
-                        servicesViewModel.updateService(id, categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString(), file);
+                        servicesViewModel.updateService(id, categoryId, binding.price.getText().toString(), binding.discountPrice.getText().toString(), binding.serviceName.getText().toString(), binding.description.getText().toString().replaceAll("\\\\n", "\n"), file);
                         binding.update.setEnabled(false);
                         progressDialog.show();
                     }
@@ -162,9 +173,10 @@ public class AddServiceActivity extends AppCompatActivity {
             binding.serviceName.setText(serviceName);
             binding.price.setText(price);
             binding.discountPrice.setText(discountedPrice);
-            binding.description.setText(info);
+            binding.description.setText(info.replaceAll("\\\\n", "\n"));
             GlideHelper.setImageView(this, binding.img, serviceImg, R.drawable.ic_image_placeholder);
 //        binding.category.setText(categoryId);
+
 
             if (categoryId.equals("100")) {
                 binding.category.setText("Hair cut");
